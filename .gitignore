@@ -1,0 +1,10 @@
+
+# System Files
+vendor
+/Log
+Temp
+composer.lock
+easyswoole
+produce.php
+
+App/Config/Database.php
