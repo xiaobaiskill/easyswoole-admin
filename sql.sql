@@ -27,11 +27,10 @@ CREATE TABLE if not exists `admin_rule` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `name` varchar(128) NOT NULL DEFAULT '' COMMENT '权限点',
   `title` varchar(128) NOT NULL DEFAULT '' COMMENT '名称',
-  `type` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '类型',
   `status` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '1 启用; 0 禁用',
   `menu` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '1 作为菜单显示; 0 不显示',
   `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父级ID',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='权限点和菜单列表';
