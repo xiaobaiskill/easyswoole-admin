@@ -20,12 +20,14 @@
     </style>
 </head>
 <body>
-	@yield('header')
+    <div style="padding:20px; background-color: #fff">
+    	@yield('header')
 
-	@yield('body')
+    	@yield('body')
 
-	@yield('footer')
+    	@yield('footer')
 
-	@yield('javascriptFooter')
+    	@yield('javascriptFooter')
+    </div>
 </body>
 </html>
