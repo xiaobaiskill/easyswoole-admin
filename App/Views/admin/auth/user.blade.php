@@ -40,7 +40,7 @@ layui.use('table', function(){
 
   table.render({
     elem: '#test'
-    ,url:'/admin/auth/get_all'
+    ,url:'/auth/get_all'
     ,method:'post'
     ,toolbar: '#toolbarDemo'
     ,page: true
@@ -69,7 +69,7 @@ layui.use('table', function(){
     form.on('switch(status)', function(obj){
         let datajson = {key:'status', value:obj.elem.checked ? '1':'0'};
 
-        $.post('/admin/auth/set/' + this.value ,datajson,function(data){
+        $.post('/auth/set/' + this.value ,datajson,function(data){
             if(data.code != 0) {
                 layer.msg(data.msg);
                 obj.elem.checked = !obj.elem.checked;
@@ -84,7 +84,7 @@ layui.use('table', function(){
         event = obj.event;
         if(event === 'del'){
             layer.confirm('真的删除行么', function(index){
-                $.post('/admin/auth/del/' + data.id ,'',function(data){
+                $.post('/auth/del/' + data.id ,'',function(data){
                     layer.close(index);
                     if(data.code != 0) {
                         layer.msg(data.msg);
@@ -104,7 +104,7 @@ layui.use('table', function(){
             }, function(value, index){
                 layer.close(index);
                 let datajson = {key:'display_name', value:value};
-                $.post('/admin/auth/set/' + data.id ,datajson,function(data){
+                $.post('/auth/set/' + data.id ,datajson,function(data){
                     if(data.code != 0) {
                         layer.msg(data.msg);
                     } else {

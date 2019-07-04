@@ -24,7 +24,7 @@
 
     table.render({
         elem: '#test'
-        ,'url' :'/admin/role/get_all'
+        ,'url' :'/role/get_all'
         ,method:'post'
         ,toolbar: '#toolbarDemo'
         ,title: '角色权限表'
@@ -42,7 +42,7 @@
     table.on('toolbar(test)', function(obj){
         switch(obj.event){
             case 'add':
-                location.href="/admin";
+                location.href="/";
             break;
         };
     });
@@ -53,7 +53,7 @@
         //console.log(obj)
         if(obj.event === 'del'){
              layer.confirm('真的删除行么', function(index){
-                $.post('/admin/role/del/' + data.id ,'',function(data){
+                $.post('/role/del/' + data.id ,'',function(data){
                     layer.close(index);
                     if(data.code != 0) {
                         layer.msg(data.msg);
@@ -70,7 +70,7 @@
               maxmin: true, // 显示最大最小化按钮
               area: ['500px', '450px'],
               title: '修改权限',
-              content: '/admin/auth/role_rule',
+              content: '/auth/role_rule',
 
             });
         }

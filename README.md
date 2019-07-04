@@ -40,6 +40,8 @@ swoole-4.3
 * composer config -g repo.packagist composer https://packagist.laravel-china.org
 
 * composer install
+// 无法下载 可忽略版本 composer install --ignore-platform-reqs
+
 
 * cp vendor/easyswoole/easyswoole/bin/easyswoole easyswoole
 
@@ -55,6 +57,14 @@ swoole-4.3
 #### 设置
 * nginx 设置静态资源
 ```
+location / {
+      rewrite ^/(.*)$ /admin/$1 break;
+      proxy_pass  http://127.0.0.1:9503;
+      proxy_redirect     off;
+      proxy_set_header   Host             $host;
+      proxy_set_header   X-Real-IP        $remote_addr;
+      proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+  }
 location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|woff2|woff|ttf)$
 {
     root /path/to/App/Static;  // 写这个项目静态文件夹的绝对地址

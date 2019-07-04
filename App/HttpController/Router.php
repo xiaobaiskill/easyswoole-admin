@@ -25,7 +25,7 @@ class Router extends AbstractRouter
 
 
         $routes->addGroup('/admin', function (RouteCollector $route) {
-            $route->get('','/Admin/Index');
+            $route->get('/','/Admin/Index');
             $route->get('/index_context','/Admin/Index/indexContext');
 
             // 管理员

@@ -339,7 +339,7 @@
                     <li>
                         <a><i class="fa fa-user"></i> <span class="nav-label">后台管理员</span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="/admin/auth">管理员列表</a>
+                            <li><a class="J_menuItem" href="/auth">管理员列表</a>
                             </li>
                             <li><a class="J_menuItem" href="basic_gallery.html">添加管理员</a>
                             </li>
@@ -348,7 +348,7 @@
                     <li>
                         <a><i class="fa fa-users"></i> <span class="nav-label">角色管理</span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem"  href="/admin/role">角色列表</a>
+                            <li><a class="J_menuItem"  href="/role">角色列表</a>
                             </li>
                             <li><a class="J_menuItem" href="basic_gallery.html">添加角色</a>
                             </li>
@@ -357,7 +357,7 @@
                     <li>
                         <a><i class="fa fa-key fa-fw"></i> <span class="nav-label">权限管理</span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="auth/rules">权限列表</a>
+                            <li><a class="J_menuItem" href="/rules">权限列表</a>
                             </li>
                             <li><a class="J_menuItem" href="basic_gallery.html">添加权限</a>
                             </li>

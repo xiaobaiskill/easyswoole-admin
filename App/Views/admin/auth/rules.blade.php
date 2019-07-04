@@ -22,7 +22,7 @@
 
     table.render({
         elem: '#test'
-        ,'url':'/admin/rules/get_all'
+        ,'url':'/rules/get_all'
         ,method:'post'
         ,toolbar: '#toolbarDemo'
         ,title: '权限'
@@ -71,7 +71,7 @@
               maxmin: true, // 显示最大最小化按钮
               area: ['500px', '450px'],
               title: '修改权限',
-              content: '/admin/auth/edit_rule',
+              content: '/auth/edit_rule',
 
             });
         }
