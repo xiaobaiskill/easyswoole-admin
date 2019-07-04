@@ -1,9 +1,5 @@
 @extends('layouts.admin')
 
-@section('stylesheet')
-<link rel="stylesheet" href="/layui/css/layui.css"  media="all">
-@endsection
-
 @section('body')
 <div id="rule" class="tree-rule-more"></div>
 <div class="layui-btn-container">
@@ -13,7 +9,6 @@
 
 
 @section('javascriptFooter')
-<script src="/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
 layui.use(['tree', 'util'], function(){

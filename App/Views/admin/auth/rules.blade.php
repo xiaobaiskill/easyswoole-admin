@@ -1,21 +1,14 @@
 @extends('layouts.admin')
 
-@section('stylesheet')
-<link rel="stylesheet" href="/layui/css/layui.css"  media="all">
-@endsection
-
 @section('body')
 <table class="layui-hide" id="test" lay-filter="test"></table>
 <script type="text/html" id="toolbarDemo">
-  <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="add">添加用户组</button>
-    <button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除用户组</button>
-    <button class="layui-btn layui-btn-normal layui-btn-sm" lay-event="del">添加权限</button>
-</div>
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-normal layui-btn-sm" lay-event="del">添加权限</button>
+    </div>
 </script>
 
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editRule">权限</a>
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -23,54 +16,26 @@
 
 
 @section('javascriptFooter')
-
-<script src="/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use('table', function(){
     var table = layui.table;
 
     table.render({
         elem: '#test'
+        ,'url':'/admin/rules/get_all'
+        ,method:'post'
         ,toolbar: '#toolbarDemo'
-        ,title: '角色权限表'
+        ,title: '权限'
         ,cols: [[
-        {type: 'checkbox', fixed: 'left'}
-        ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
+        {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
         ,{field:'name', title:'用户名', width:220, edit: 'text'}
-        ,{field:'detail', title:'描述', edit: 'text', templet: function(res){
-            return '<em>'+ res.detail +'</em>'
-        }}
+        ,{field:'url', title:'路径', edit: 'text'}
+        ,{field:'menu', title:'是否菜单', width:220}
+        ,{field:'status', title:'是否启用', width:220}
+        ,{field:'created_at', title:'创建时间', width:220}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width: 180}
         ]]
         ,defaultToolbar:[]
-        ,code: 0
-        ,msg: ""
-        ,count: 3000000
-        ,data: [{
-            "id": "10001"
-            ,"name": "杜甫"
-            ,"detail": "xianxin@layui.com"
-        }, {
-            "id": "10001"
-            ,"name": "杜甫"
-            ,"detail": "xianxin@layui.com"
-        },{
-            "id": "10001"
-            ,"name": "杜甫"
-            ,"detail": "xianxin@layui.com"
-        },{
-            "id": "10001"
-            ,"name": "杜甫"
-            ,"detail": "xianxin@layui.com"
-        },{
-            "id": "10001"
-            ,"name": "杜甫"
-            ,"detail": "xianxin@layui.com"
-        },{
-            "id": "10001"
-            ,"name": "杜甫"
-            ,"detail": "xianxin@layui.com"
-        },]
         ,page: true
     });
 

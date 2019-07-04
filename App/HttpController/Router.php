@@ -25,23 +25,29 @@ class Router extends AbstractRouter
 
 
         $routes->addGroup('/admin', function (RouteCollector $route) {
-            $route->get('/','/Admin/Index');
+            $route->get('','/Admin/Index');
             $route->get('/index_context','/Admin/Index/indexContext');
 
-            // 用户管理
+            // 管理员
             $route->addGroup('/auth',function(RouteCollector $r){
-                $r->get('/edit_rule','/Admin/Auth/Rules/editRule');
-                $r->get('/role_rule','/Admin/Auth/Role/editRule');
-                $r->get('/rules','/Admin/Auth/Rules');
-                $r->get('/role','/Admin/Auth/Role');
                 $r->get('','/Admin/Auth/User');
+                $r->post('/get_all','/Admin/Auth/User/getAll');
+                $r->post('/set/{id:\d+}','/Admin/Auth/User/set');
+                $r->post('/del/{id:\d+}','/Admin/Auth/User/del');
             });
 
-            // $route->addRoute(['GET'], '/', '/Admin/Index');
-            // $route->addRoute(['GET'], '/index_context', '/Admin/Index/indexContext');
+            // 角色
+            $route->addGroup('/role',function(RouteCollector $r){
+                $r->get('','/Admin/Auth/Role');
+                $r->post('/get_all','/Admin/Auth/Role/getAll');
+                $r->post('/del/{id:\d+}','/Admin/Auth/Role/del');
+            });
 
-
-
+            // 权限
+            $route->addGroup('/rules',function(RouteCollector $r){
+                $r->addRoute(['GET'], '', '/Admin/Auth/Rules');
+                 $r->post('/get_all','/Admin/Auth/Rules/getAll');
+            });
         });
     }
 }

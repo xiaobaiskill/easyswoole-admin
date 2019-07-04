@@ -5,7 +5,8 @@ create table if not exists `admin_auth` (
 	`pwd` text not null comment '密码',
 	`encry` char(6) not null comment '加密串',
 	`role_id` int(10) unsigned not null comment '组id',
-	`logind_at`  datetime comment '最近登陆时间',
+	`display_name` varchar(100) default '' comment '显示用户名',
+	`logined_at`  datetime comment '最近登陆时间',
 	`created_at` timestamp null default current_timestamp,
 	`status` tinyint(1) default 1 comment '状态 0 启用 1禁用 ',
   	`deleted` tinyint(1) default 0 ,
@@ -25,12 +26,15 @@ create table if not exists `admin_role` (
 # 权限
 CREATE TABLE if not exists `admin_rule` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-  `name` varchar(128) NOT NULL DEFAULT '' COMMENT '权限点',
-  `title` varchar(128) NOT NULL DEFAULT '' COMMENT '名称',
+  `name` varchar(128) NOT NULL DEFAULT '' COMMENT '名称',
+  `node` varchar(50) default '' comment '节点',
+  `url` varchar(128) NOT NULL DEFAULT '' COMMENT '路径',
   `status` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '1 启用; 0 禁用',
   `menu` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '1 作为菜单显示; 0 不显示',
   `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父级ID',
+  `created_at` timestamp default current_timestamp,
   `deleted` tinyint(1) DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`),
-  KEY `name` (`name`)
+  KEY `name` (`name`),
+  KEY `delete_status_node` (`deleted`,`status`,`node`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='权限点和菜单列表';

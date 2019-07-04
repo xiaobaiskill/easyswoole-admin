@@ -337,13 +337,31 @@
                         <span class="ng-scope">管理用户</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="auth"><i class="fa fa-users"></i> <span class="nav-label">后台管理员</span></a>
+                        <a><i class="fa fa-user"></i> <span class="nav-label">后台管理员</span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="/admin/auth">管理员列表</a>
+                            </li>
+                            <li><a class="J_menuItem" href="basic_gallery.html">添加管理员</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="auth/role"><i class="fa fa-magic"></i> <span class="nav-label">角色管理</span></a>
+                        <a><i class="fa fa-users"></i> <span class="nav-label">角色管理</span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem"  href="/admin/role">角色列表</a>
+                            </li>
+                            <li><a class="J_menuItem" href="basic_gallery.html">添加角色</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="auth/rules"><i class="fa fa-magic"></i> <span class="nav-label">权限管理</span></a>
+                        <a><i class="fa fa-key fa-fw"></i> <span class="nav-label">权限管理</span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="auth/rules">权限列表</a>
+                            </li>
+                            <li><a class="J_menuItem" href="basic_gallery.html">添加权限</a>
+                            </li>
+                        </ul>
                     </li>
 
 					<!-- 设置 -->

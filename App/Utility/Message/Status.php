@@ -14,5 +14,4 @@ class Status
     // Informational 1xx
     const CODE_OK = 0;     		// 成功
     const CODE_ERR = -1; 		// 失败
-    const CODE_VERIFY_ERR = -5; 	// 验证码 有误
 }
