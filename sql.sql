@@ -35,6 +35,6 @@ CREATE TABLE if not exists `admin_rule` (
   `created_at` timestamp default current_timestamp,
   `deleted` tinyint(1) DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`),
-  KEY `name` (`name`),
+  UNIQUE key(`node`),
   KEY `delete_status_node` (`deleted`,`status`,`node`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='权限点和菜单列表';

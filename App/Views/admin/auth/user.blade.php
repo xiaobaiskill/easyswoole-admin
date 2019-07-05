@@ -10,26 +10,28 @@
 @endsection
 
 @section('body')
-<table class="layui-hide" id="test" lay-filter="test"></table>
+<div class="white p20">
+    <table class="layui-hide" id="test" lay-filter="test"></table>
 
-<script type="text/html" id="toolbarDemo">
-    <div class="layui-inline">
-        <input class="layui-input layui-btn-sm" name="id" id="demoReload" autocomplete="off">
-    </div>
-    <button class="layui-btn layui-btn-sm" data-type="reload">搜索</button>
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-inline">
+            <input class="layui-input layui-btn-sm" name="id" id="demoReload" autocomplete="off">
+        </div>
+        <button class="layui-btn layui-btn-sm" data-type="reload">搜索</button>
 
-    <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加管理员</button>
+        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加管理员</button>
 
-</script>
+    </script>
 
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
 
-<script type="text/html" id="switchTpl">
-    <input type="checkbox" name="status" value="@{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="status" @{{ d.status == 1 ? 'checked' : '' }}>
-</script>
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="status" value="@{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="status" @{{ d.status == 1 ? 'checked' : '' }}>
+    </script>
+</div>
 @endsection
 
 
@@ -92,8 +94,6 @@ layui.use('table', function(){
                         obj.del();
                     }
                 });
-
-
             });
         } else if(event === 'edit'){
             return ;

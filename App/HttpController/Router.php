@@ -41,12 +41,23 @@ class Router extends AbstractRouter
                 $r->get('','/Admin/Auth/Role');
                 $r->post('/get_all','/Admin/Auth/Role/getAll');
                 $r->post('/del/{id:\d+}','/Admin/Auth/Role/del');
+
+                $r->get('/edit_rule','/Admin/Auth/Role/editRule');
             });
 
             // 权限
-            $route->addGroup('/rules',function(RouteCollector $r){
-                $r->addRoute(['GET'], '', '/Admin/Auth/Rules');
-                 $r->post('/get_all','/Admin/Auth/Rules/getAll');
+            $route->addGroup('/rule',function(RouteCollector $r){
+                $r->addRoute(['GET'], '', '/Admin/Auth/Rule');
+                $r->post('/get_all','/Admin/Auth/Rule/getAll');
+
+                $r->get('/add','/Admin/Auth/Rule/add');
+                $r->post('/add','/Admin/Auth/Rule/addData');
+
+                $r->get('/edit/{id:\d+}','/Admin/Auth/Rule/edit');
+                $r->post('/edit/{id:\d+}','/Admin/Auth/Rule/editData');
+                $r->post('/set/{id:\d+}','/Admin/Auth/Rule/set');
+
+                $r->post('/del/{id:\d+}','/Admin/Auth/Rule/del');
             });
         });
     }

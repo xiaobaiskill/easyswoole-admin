@@ -131,6 +131,11 @@ abstract class BaseModel
     	return $this->db->getOne($this->table, $columns);
     }
 
+    public function find($id, $columns = '*')
+    {
+        return $this->where('id', $id)->getOne($columns);
+    }
+
     public function getValue($column, $limit = 1)
     {
     	return $this->db->getValue($this->table, $columns, $limit);
@@ -196,6 +201,17 @@ abstract class BaseModel
     public function delete($tableName, $numRows = null)
     {
         return $this->db->delete($this->table, $numRows);
+    }
+
+    // $del => 真删除 还是 假删除
+    public function delId($id, $del = false)
+    {
+        if($del){
+            return $this->where('id',$id)->delete();
+        } else {
+            return $this->where('id',$id)->setValue('deleted',1);
+        }
+
     }
 
     public function setValue($filedName, $value)

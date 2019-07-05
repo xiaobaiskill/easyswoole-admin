@@ -17,17 +17,23 @@
 			padding: 0px;
 			list-style: none;
     	}
+
+        .white {
+            background-color: #fff;
+        }
+
+        .p20 {
+            padding:20px;
+        }
     </style>
 </head>
 <body>
-    <div style="padding:20px; background-color: #fff">
-    	@yield('header')
+	@yield('header')
 
-    	@yield('body')
+	@yield('body')
 
-    	@yield('footer')
+	@yield('footer')
 
-    	@yield('javascriptFooter')
-    </div>
+	@yield('javascriptFooter')
 </body>
 </html>

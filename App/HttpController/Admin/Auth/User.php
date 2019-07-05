@@ -68,6 +68,7 @@ class User extends AdminController
 			$this->writeJson(Status::CODE_OK,'');
 		} else {
 			$this->writeJson(Status::CODE_ERR,'设置失败');
+			Log::getInstance()->error("user--set:" .  json_encode($data, JSON_UNESCAPED_UNICODE) . "没有设置失败");
 		}
 	}
 
@@ -75,12 +76,12 @@ class User extends AdminController
 	{
 		$request = $this->request();
 		$id = $request->getRequestParam('id');
-		$bool =  AuthModel::getInstance()->where('id', $id, '=')
-								->setValue('deleted',1);
+		$bool =  AuthModel::getInstance()->delId($id);
 		if($bool) {
 			$this->writeJson(Status::CODE_OK,'');
 		} else {
 			$this->writeJson(Status::CODE_ERR,'删除失败');
+			Log::getInstance()->error("user--del:" .  $id . "没有删除失败");
 		}
 	}
 }

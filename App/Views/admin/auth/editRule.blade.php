@@ -19,8 +19,7 @@ layui.use(['tree', 'util'], function(){
    ,data = [{
     title: '一级1'
     ,id: 1
-    ,checked: true
-    ,spread: true
+    ,checked: 1
     ,children: [{
       title: '二级1-1 可允许跳转'
       ,id: 3

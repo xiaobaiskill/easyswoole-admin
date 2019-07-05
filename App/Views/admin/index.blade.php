@@ -357,9 +357,9 @@
                     <li>
                         <a><i class="fa fa-key fa-fw"></i> <span class="nav-label">权限管理</span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="/rules">权限列表</a>
+                            <li><a class="J_menuItem" href="/rule">权限列表</a>
                             </li>
-                            <li><a class="J_menuItem" href="basic_gallery.html">添加权限</a>
+                            <li><a class="J_menuItem" href="/rule/add">添加权限</a>
                             </li>
                         </ul>
                     </li>

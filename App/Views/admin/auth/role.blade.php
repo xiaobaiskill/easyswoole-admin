@@ -2,18 +2,20 @@
 
 
 @section('body')
-<table class="layui-hide" id="test" lay-filter="test"></table>
-<script type="text/html" id="toolbarDemo">
-  <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="add">添加用户组</button>
-</div>
-</script>
+<div class="white p20">
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="add">添加用户组</button>
+        </div>
+    </script>
 
-<script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editRule">变更权限</a>
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editRule">变更权限</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+</div>
 @endsection
 
 
@@ -50,7 +52,6 @@
     //监听行工具事件
     table.on('tool(test)', function(obj){
         var data = obj.data;
-        //console.log(obj)
         if(obj.event === 'del'){
              layer.confirm('真的删除行么', function(index){
                 $.post('/role/del/' + data.id ,'',function(data){
@@ -69,9 +70,8 @@
               type: 2,
               maxmin: true, // 显示最大最小化按钮
               area: ['500px', '450px'],
-              title: '修改权限',
-              content: '/auth/role_rule',
-
+              title: '变更权限',
+              content: '/role/edit_rule',
             });
         }
     });
