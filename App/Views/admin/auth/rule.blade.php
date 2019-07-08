@@ -7,7 +7,7 @@
     <!-- 表头 -->
     <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-normal layui-btn-sm" lay-event="add">添加权限</button>
+            <button class="layui-btn layui-btn-normal layui-btn-sm" lay-event="add">添加最高权限</button>
         </div>
     </script>
 

@@ -8,7 +8,7 @@ use App\Utility\Message\Status;
 use App\Utility\Log\Log;
 
 use App\Model\AdminAuth as AuthModel;
-
+use App\Model\AdminRole as RoleModel;
 
 class User extends AdminController
 {
@@ -33,7 +33,14 @@ class User extends AdminController
 
 	public function add()
 	{
-		return ;
+		$role_data = RoleModel::getInstance()->get(null, 'id,name');
+
+		$this->render('admin.auth.userAdd',['role_data'=>$role_data]);
+	}
+
+	public function addData()
+	{
+
 	}
 
 	// 多字段修改
