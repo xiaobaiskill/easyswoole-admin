@@ -22,9 +22,9 @@
 						</div>
 
 						<div class="layui-form-item">
-							<label class="layui-form-label">路径</label>
+							<label class="layui-form-label">是否是菜单</label>
 							<div class="layui-input-block">
-								<input type="text" name="url" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+								<input type="checkbox" name="menu" lay-skin="switch" lay-text="是|否">
 							</div>
 						</div>
 
@@ -32,13 +32,6 @@
 							<label class="layui-form-label">是否启动</label>
 							<div class="layui-input-block">
 								<input type="checkbox" name="status" lay-skin="switch" checked lay-text="是|否">
-							</div>
-						</div>
-
-						<div class="layui-form-item">
-							<label class="layui-form-label">是否是菜单</label>
-							<div class="layui-input-block">
-								<input type="checkbox" name="menu" lay-skin="switch" lay-text="是|否">
 							</div>
 						</div>
 

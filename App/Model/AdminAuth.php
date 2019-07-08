@@ -8,7 +8,7 @@ class AdminAuth extends BaseModel
 {
 	protected $table = "admin_auth";
 
-	public function getAll($page, $limit)
+	public function findAll($page, $limit)
 	{
 		$data = $this->where('deleted',0,'=')
 				->orderBy('created_at','ASC')

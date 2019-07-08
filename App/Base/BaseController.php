@@ -17,6 +17,11 @@ abstract class BaseController extends Controller
 		$this->response()->write(Render::getInstance()->render($template, $data, $options));
 	}
 
+    public function show404()
+    {
+        $this->render('default.404');
+    }
+
 	public function writeJson($statusCode = 200, $msg = null, $data = null)
 	{
         if (!$this->response()->isEndResponse()) {

@@ -46,10 +46,9 @@
         {field:'id', title:'ID', width:80, fixed: 'left'}
         ,{field:'name', title:'用户名', width:220, event:'edit_name'}
         ,{field:'node', title:'节点标记', width:220, event:'edit_node'}
-        ,{field:'url', title:'路径', event:'edit_url'}
         ,{field:'menu', title:'是否菜单', templet: '#switchMenu', width:100}
         ,{field:'status', title:'是否启用', templet: '#switchStatus', width:100}
-        ,{field:'created_at', title:'创建时间', width:220}
+        ,{field:'created_at', title:'创建时间'}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width: 180}
         ]]
         ,defaultToolbar:[]
@@ -142,24 +141,6 @@
                         } else {
                             obj.update({
                               node: value
-                            });
-                        }
-                    });
-                });
-            break;
-            case 'edit_url':
-                layer.prompt({
-                    formType: 2
-                    ,value: data.url
-                }, function(value, index){
-                    layer.close(index);
-                    let datajson = {key:'url', value:value};
-                    $.post('/rule/set/' + data.id ,datajson,function(data){
-                        if(data.code != 0) {
-                            layer.msg(data.msg);
-                        } else {
-                            obj.update({
-                              url: value
                             });
                         }
                     });

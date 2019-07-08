@@ -20,9 +20,9 @@ class Rule extends AdminController
 	{
 		$data = $this->getPage();
 
-		$rule_data = RuleModel::getInstance()->getAll($data['page'], $data['limit']);
+		$rule_data = RuleModel::getInstance()->findAll($data['page'], $data['limit']);
 
-		$rule_count = RuleModel::getInstance()->where('deleted',0,'=')->count();
+		$rule_count = RuleModel::getInstance()->count();
 		$data = ['code'=>Status::CODE_OK,'count'=>$rule_count,'data'=>$rule_data];
 		$this->dataJson($data);
 	}
@@ -31,12 +31,11 @@ class Rule extends AdminController
 	private function fieldInfo()
 	{
 		$request = $this->request();
-		$data = $request->getRequestParam('name','node','url', 'menu', 'status','pid');
+		$data = $request->getRequestParam('name','node', 'menu', 'status','pid');
 
 		$validate = new \EasySwoole\Validate\Validate();
 		$validate->addColumn('name')->required();
 		$validate->addColumn('node')->required();
-		$validate->addColumn('url')->required();
 		$validate->addColumn('menu')->required();
 		$validate->addColumn('status')->required();
 		$validate->addColumn('pid')->required();
@@ -75,13 +74,13 @@ class Rule extends AdminController
 		$id = $this->request()->getRequestParam('id');
 
 		if(!$id){
-			$this->render('default.404');
+			$this->show404();
 			return ;
 		}
 
 		$info = RuleModel::getInstance()->find($id);
 		if(!$info) {
-			$this->render('default.404');
+			$this->show404();
 			return ;
 		}
 
@@ -123,7 +122,7 @@ class Rule extends AdminController
 		$validate->addColumn('key')->required()->func(function($params, $key) {
 		    return $params instanceof \EasySwoole\Spl\SplArray
 		    		&& $key == 'key'
-		    		&& in_array($params[$key], ['menu','status','name','node','url']);
+		    		&& in_array($params[$key], ['menu','status','name','node']);
 		}, '请勿乱操作');
 
 		$validate->addColumn('id')->required();
@@ -149,7 +148,7 @@ class Rule extends AdminController
 	{
 		$request = $this->request();
 		$id = $request->getRequestParam('id');
-		$bool =  RuleModel::getInstance()->delId($id);
+		$bool =  RuleModel::getInstance()->delId($id, true);
 		if($bool) {
 			$this->writeJson(Status::CODE_OK,'');
 		} else {

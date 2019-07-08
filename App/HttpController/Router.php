@@ -42,7 +42,8 @@ class Router extends AbstractRouter
                 $r->post('/get_all','/Admin/Auth/Role/getAll');
                 $r->post('/del/{id:\d+}','/Admin/Auth/Role/del');
 
-                $r->get('/edit_rule','/Admin/Auth/Role/editRule');
+                $r->get('/edit_rule/{id:\d+}','/Admin/Auth/Role/editRule');
+                $r->post('/edit_rule/{id:\d+}','/Admin/Auth/Role/editRuleData');
             });
 
             // 权限

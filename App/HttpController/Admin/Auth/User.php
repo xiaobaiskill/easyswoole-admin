@@ -23,7 +23,7 @@ class User extends AdminController
 		$data = $this->getPage();
 
 		$auth_data = AuthModel::getInstance()
-						->getAll($data['page'],$data['limit']);
+						->findAll($data['page'],$data['limit']);
 
 		$auth_count = AuthModel::getInstance()->where('deleted',0,'=')->count();
 		$data = ['code'=>Status::CODE_OK,'count'=>$auth_count,'data'=>$auth_data];

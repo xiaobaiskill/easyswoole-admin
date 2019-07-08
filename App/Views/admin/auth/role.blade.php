@@ -71,7 +71,7 @@
               maxmin: true, // 显示最大最小化按钮
               area: ['500px', '450px'],
               title: '变更权限',
-              content: '/role/edit_rule',
+              content: '/role/edit_rule/' + data.id,
             });
         }
     });

@@ -9,7 +9,6 @@ layui.use('form', function(){
 	form.val("form", {
 		"name": "{{ $info['name'] }}"
 		,"node": "{{ $info['node'] }}"
-		,"url": "{{ $info['url'] }}"
 		,"status": {{ $info['status'] }}
 		,"menu": {{ $info['menu'] }}
 		,"pid": "{{ $info['pid'] }}"

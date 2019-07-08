@@ -28,13 +28,11 @@ CREATE TABLE if not exists `admin_rule` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `name` varchar(128) NOT NULL DEFAULT '' COMMENT '名称',
   `node` varchar(50) default '' comment '节点',
-  `url` varchar(128) NOT NULL DEFAULT '' COMMENT '路径',
   `status` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '1 启用; 0 禁用',
   `menu` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '1 作为菜单显示; 0 不显示',
   `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父级ID',
   `created_at` timestamp default current_timestamp,
-  `deleted` tinyint(1) DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`),
-  UNIQUE key(`node`),
-  KEY `delete_status_node` (`deleted`,`status`,`node`)
+  KEY node(`node`),
+  KEY `status_node` (`status`,`node`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='权限点和菜单列表';

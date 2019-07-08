@@ -331,13 +331,15 @@
                         </ul>
                     </li>
 
+
+
 					<!-- 用户管理 -->
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">管理用户</span>
                     </li>
                     <li>
-                        <a><i class="fa fa-user"></i> <span class="nav-label">后台管理员</span></a>
+                        <a href="#"><i class="fa fa-user"></i> <span class="nav-label">后台管理员</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="/auth">管理员列表</a>
                             </li>
@@ -346,7 +348,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a><i class="fa fa-users"></i> <span class="nav-label">角色管理</span></a>
+                        <a href="#"><i class="fa fa-users"></i> <span class="nav-label">角色管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem"  href="/role">角色列表</a>
                             </li>
@@ -355,7 +357,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a><i class="fa fa-key fa-fw"></i> <span class="nav-label">权限管理</span></a>
+                        <a href="#"><i class="fa fa-key fa-fw"></i> <span class="nav-label">权限管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="/rule">权限列表</a>
                             </li>
