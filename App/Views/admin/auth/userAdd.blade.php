@@ -5,35 +5,40 @@
 @section('javascriptFooter')
 <script>
 layui.use('form', function(){
-	var form = layui.form;
+	var form = layui.form, $ = layui.jquery,form_field;
 
+
+	function callback(data)
+	{
+		if(data.code != 0) {
+	        layer.msg(data.msg);
+	    } else {
+	        layer.msg('添加成功',{time:1000},function(){
+	            location.href = '/auth';
+	        });
+
+	    }
+	}
 	form.verify({
-		title: function(value){
-			if(value.length < 5){
-				return '标题至少得5个字符啊';
-			}
-		}
-		,pass: [
+		pwd: [
 			/^[\S]{6,12}$/
-			,'密码必须6到12位，且不能出现空格'
-		]
-		,content: function(value){
-		 	layedit.sync(editIndex);
+			,'密码必须6到15位，且不能出现空格'
+		],
+		verify_pwd:function(value, item){
+			var pwd = $("input[name='pwd']").val();
+			if(pwd !== value) {
+				return '两次输入的密码不一致';
+			}
 		}
 	});
 
 	//监听提交
 	form.on('submit(submit)', function(data){
-		$.post('/user/add', data.field, function(info){
-		    if(info.code != 0) {
-		        layer.msg(info.msg);
-		    } else {
-		        layer.msg('添加成功',{time:1000},function(){
-		            location.href = '/role';
-		        });
-
-		    }
-		});
+		form_field = data;
+		delete data.field.verify_pwd;
+		data.field.status = data.field.status ? 1 : 0;
+		console.log(data.field);
+		post('/auth/add',data.field,callback);
 		return false;
 	});
 });

@@ -1,7 +1,7 @@
 # 后台管理员
 create table if not exists `admin_auth` (
 	`id` int(10) unsigned not null AUTO_INCREMENT,
-	`uname` varchar(200) not null comment '用户名',
+	`uname` varchar(20) not null comment '用户名',
 	`pwd` text not null comment '密码',
 	`encry` char(6) not null comment '加密串',
 	`role_id` int(10) unsigned not null comment '组id',
@@ -10,7 +10,8 @@ create table if not exists `admin_auth` (
 	`created_at` timestamp null default current_timestamp,
 	`status` tinyint(1) default 1 comment '状态 0 启用 1禁用 ',
   	`deleted` tinyint(1) default 0 ,
-	PRIMARY key(`id`)
+	PRIMARY key(`id`),
+	UNIQUE KEY(`uname`)
 ) engine=InnoDB default CHARSET=utf8mb4 COMMENT='后台管理员';
 
 # 组

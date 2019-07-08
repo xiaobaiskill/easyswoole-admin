@@ -36,6 +36,7 @@ class Router extends AbstractRouter
                 $r->post('/get_all','/Admin/Auth/User/getAll');
 
                 $r->get('/add','/Admin/Auth/User/add');
+                $r->post('/add','/Admin/Auth/User/addData');
 
                 $r->post('/set/{id:\d+}','/Admin/Auth/User/set');
                 $r->post('/del/{id:\d+}','/Admin/Auth/User/del');

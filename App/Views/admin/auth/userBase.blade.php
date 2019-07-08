@@ -11,27 +11,27 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">登陆名</label>
                             <div class="layui-input-block">
-                                <input type="text" name="name" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+                                <input type="text" name="uname" required  lay-verify="required" placeholder="请输入登陆名" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">密码</label>
                             <div class="layui-input-block">
-                                <input type="text" name="detail" required lay-verify="required" placeholder="请输入节点标识" autocomplete="off" class="layui-input">
+                                <input type="text" name="pwd" required lay-verify="required|pwd" placeholder="请输入密码" autocomplete="off" class="layui-input">
                             </div>
                         </div>
 
                         <div class="layui-form-item">
-                            <label class="layui-form-label">再次输入密码</label>
+                            <label class="layui-form-label">重复密码</label>
                             <div class="layui-input-block">
-                                <input type="text" name="detail" required lay-verify="required" placeholder="请输入节点标识" autocomplete="off" class="layui-input">
+                                <input type="text" name="verify_pwd" required lay-verify="required|verify_pwd" placeholder="请输入密码" autocomplete="off" class="layui-input">
                             </div>
                         </div>
 
 						<div class="layui-form-item">
 							<label class="layui-form-label">所属组</label>
 							<div class="layui-input-block">
-								<select name="role_id" lay-filter="aihao">
+								<select name="role_id">
 									@foreach($role_data as $k=>$v)
 										<option value="{{$v['id']}}">{{$v['name']}}</option>
 									@endforeach
@@ -42,7 +42,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">真实用户名</label>
                             <div class="layui-input-block">
-                                <input type="text" name="detail" required lay-verify="required" placeholder="请输入节点标识" autocomplete="off" class="layui-input">
+                                <input type="text" name="display_name" required lay-verify="required" placeholder="请输入真实用户名" autocomplete="off" class="layui-input">
                             </div>
                         </div>
 

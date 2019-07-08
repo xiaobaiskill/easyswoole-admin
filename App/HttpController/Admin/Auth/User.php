@@ -10,6 +10,10 @@ use App\Utility\Log\Log;
 use App\Model\AdminAuth as AuthModel;
 use App\Model\AdminRole as RoleModel;
 
+use App\Common\AppFunc;
+
+use EasySwoole\EasySwoole\Config;
+
 class User extends AdminController
 {
 	public function index()
@@ -31,6 +35,26 @@ class User extends AdminController
 		return ;
 	}
 
+	private function fieldInfo()
+	{
+		$request = $this->request();
+		$data = $request->getRequestParam('uname', 'pwd', 'status', 'display_name', 'role_id');
+
+		$validate = new \EasySwoole\Validate\Validate();
+		$validate->addColumn('uname')->required();
+		$validate->addColumn('pwd')->required();
+		$validate->addColumn('status')->required();
+		$validate->addColumn('display_name')->required();
+		$validate->addColumn('role_id')->required();
+
+		if(!$validate->validate($data)) {
+			$this->writeJson(Status::CODE_ERR,'请勿乱操作');
+			return ;
+		}
+
+		return $data;
+	}
+
 	public function add()
 	{
 		$role_data = RoleModel::getInstance()->get(null, 'id,name');
@@ -40,7 +64,22 @@ class User extends AdminController
 
 	public function addData()
 	{
+		$data = $this->fieldInfo();
+		if(!$data) {
+			return ;
+		}
+		$data['encry'] = AppFunc::getRandomStr(6);
+		$encry = Config::getInstance()->getConf('app.verify');
+		$data['pwd'] = md5($data['encry'] . $data['pwd'] . $encry);
+		if(AuthModel::getInstance()->insert($data)){
+			$this->writeJson(Status::CODE_OK);
+		} else {
+			$this->writeJson(Status::CODE_ERR,'添加失败');
+			Log::getInstance()->error( "user--addData:" . json_encode($data, JSON_UNESCAPED_UNICODE) . "添加失败");
 
+		}
+
+		return ;
 	}
 
 	// 多字段修改
