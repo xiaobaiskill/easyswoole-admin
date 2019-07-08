@@ -4,6 +4,7 @@ namespace App\Common;
 
 class AppFunc
 {
+    // 二维数组 转 tree
     static public function arrayToTree($list,$pid = 'pid')
     {
     	$map = [];
@@ -16,7 +17,7 @@ class AppFunc
     	return self::makeTree($map);
     }
 
-    static public function makeTree($list, $parent_id = 0)
+    static private function makeTree($list, $parent_id = 0)
     {
     	$items = isset($list[$parent_id]) ? $list[$parent_id] : [];
     	if(!$items)
@@ -35,4 +36,20 @@ class AppFunc
 
     	return $trees;
     }
+
+    // 规则 |--- 就分的
+    static public function treeRule($tree_list, &$tree , $pre = '', $child = 'children')
+    {
+        if(is_array($tree_list)) {
+            foreach ($tree_list as $k => $v) {
+                $v['name'] = $pre . $v['name'];
+                $tree[] = $v;
+                if(isset($v[$child])) {
+                    self::treeRule($v[$child], $tree, $pre . '&nbsp;|-----&nbsp;');
+                }
+            }
+        }
+    }
+
+
 }

@@ -18,7 +18,8 @@ create table if not exists `admin_role` (
 	`id` int(10) unsigned not null AUTO_INCREMENT,
 	`name` varchar(50) not null comment '组名',
 	`detail` varchar(200) not null comment '简单描述',
-	`rules` text  comment '权限列表',
+	`rules_checked` text  comment 'layui 树形选中的checked',
+	`rules` text  comment '权限列表 所有打勾的',
 	`created_at` timestamp null default current_timestamp,
 	PRIMARY key(`id`)
 ) engine =InnoDB default charset=utf8mb4 comment= '组名';
@@ -29,7 +30,6 @@ CREATE TABLE if not exists `admin_rule` (
   `name` varchar(128) NOT NULL DEFAULT '' COMMENT '名称',
   `node` varchar(50) default '' comment '节点',
   `status` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '1 启用; 0 禁用',
-  `menu` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '1 作为菜单显示; 0 不显示',
   `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父级ID',
   `created_at` timestamp default current_timestamp,
   PRIMARY KEY (`id`),

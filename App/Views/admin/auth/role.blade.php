@@ -21,6 +21,7 @@
 
 @section('javascriptFooter')
 <script>
+
     layui.use('table', function(){
     var table = layui.table;
 
@@ -32,8 +33,9 @@
         ,title: '角色权限表'
         ,cols: [[
         {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-        ,{field:'name', title:'用户名', width:220, edit: 'text'}
-        ,{field:'detail', title:'描述', edit: 'text'}
+        ,{field:'name', title:'用户名', width:220, edit: 'text', event:'edit_name'}
+        ,{field:'detail', title:'描述', edit: 'text', event:'edit_detail'}
+        ,{field:'created_at', title:'创建时间'}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width: 180}
         ]]
         ,defaultToolbar:[]
@@ -44,7 +46,7 @@
     table.on('toolbar(test)', function(obj){
         switch(obj.event){
             case 'add':
-                location.href="/";
+                location.href="/role/add";
             break;
         };
     });
@@ -52,27 +54,67 @@
     //监听行工具事件
     table.on('tool(test)', function(obj){
         var data = obj.data;
-        if(obj.event === 'del'){
-             layer.confirm('真的删除行么', function(index){
-                $.post('/role/del/' + data.id ,'',function(data){
+        switch(obj.event){
+            case 'edit_name':
+                layer.prompt({
+                    formType: 2
+                    ,value: data.name
+                }, function(value, index){
                     layer.close(index);
-                    if(data.code != 0) {
-                        layer.msg(data.msg);
-                    } else {
-                        obj.del();
-                    }
+                    let datajson = {key:'name', value:value};
+                    $.post('/role/set/' + data.id ,datajson,function(data){
+                        if(data.code != 0) {
+                            layer.msg(data.msg);
+                        } else {
+                            obj.update({
+                              name: value
+                            });
+                        }
+                    });
                 });
-            });
-        } else if(obj.event === 'edit'){
-            layer.alert('delete');
-        } else if(obj.event === 'editRule') {
-            layer.open({
-              type: 2,
-              maxmin: true, // 显示最大最小化按钮
-              area: ['500px', '450px'],
-              title: '变更权限',
-              content: '/role/edit_rule/' + data.id,
-            });
+            break;
+            case 'edit_detail':
+                layer.prompt({
+                    formType: 2
+                    ,value: data.detail
+                }, function(value, index){
+                    layer.close(index);
+                    let datajson = {key:'detail', value:value};
+                    $.post('/role/set/' + data.id ,datajson,function(data){
+                        if(data.code != 0) {
+                            layer.msg(data.msg);
+                        } else {
+                            obj.update({
+                              detail: value
+                            });
+                        }
+                    });
+                });
+            break;
+            case 'del':
+                layer.confirm('真的删除行么', function(index){
+                    $.post('/role/del/' + data.id ,'',function(data){
+                        layer.close(index);
+                        if(data.code != 0) {
+                            layer.msg(data.msg);
+                        } else {
+                            obj.del();
+                        }
+                    });
+                });
+            break;
+            case 'edit':
+                location.href = '/role/edit/' + data.id;
+            break;
+            case 'editRule':
+                layer.open({
+                    type: 2,
+                    maxmin: true, // 显示最大最小化按钮
+                    area: ['500px', '450px'],
+                    title: '变更权限',
+                    content: '/role/edit_rule/' + data.id,
+                });
+            break;
         }
     });
 });

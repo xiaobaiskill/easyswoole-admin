@@ -13,12 +13,14 @@ class Router extends AbstractRouter
     {
         // 未找到路由对应的方法
         $this->setMethodNotAllowCallBack(function (Request $request, Response $response) {
+            var_dump(111);
             $response->write(Render::getInstance()->render('default.404'));
             $response->withStatus(404);
         });
 
         // 未找到路由匹配
         $this->setRouterNotFoundCallBack(function (Request $request, Response $response) {
+            var_dump(222);
             $response->write(Render::getInstance()->render('default.404'));
             $response->withStatus(404);
         });
@@ -40,10 +42,18 @@ class Router extends AbstractRouter
             $route->addGroup('/role',function(RouteCollector $r){
                 $r->get('','/Admin/Auth/Role');
                 $r->post('/get_all','/Admin/Auth/Role/getAll');
-                $r->post('/del/{id:\d+}','/Admin/Auth/Role/del');
+
+                $r->get('/add','/Admin/Auth/Role/add');
+                $r->post('/add','/Admin/Auth/Role/addData');
+
+                $r->get('/edit/{id:\d+}','/Admin/Auth/Role/edit');
+                $r->post('/edit/{id:\d+}','/Admin/Auth/Role/editData');
 
                 $r->get('/edit_rule/{id:\d+}','/Admin/Auth/Role/editRule');
                 $r->post('/edit_rule/{id:\d+}','/Admin/Auth/Role/editRuleData');
+                $r->post('/set/{id:\d+}','/Admin/Auth/Role/set');
+
+                $r->post('/del/{id:\d+}','/Admin/Auth/Role/del');
             });
 
             // 权限
@@ -53,6 +63,10 @@ class Router extends AbstractRouter
 
                 $r->get('/add','/Admin/Auth/Rule/add');
                 $r->post('/add','/Admin/Auth/Rule/addData');
+
+                // 添加子节点
+                $r->get('/add/{id:\d+}','/Admin/Auth/Rule/addChild');
+                $r->post('/add/{id:\d+}','/Admin/Auth/Rule/addChildData');
 
                 $r->get('/edit/{id:\d+}','/Admin/Auth/Rule/edit');
                 $r->post('/edit/{id:\d+}','/Admin/Auth/Rule/editData');

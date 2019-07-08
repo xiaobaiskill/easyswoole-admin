@@ -343,7 +343,7 @@
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="/auth">管理员列表</a>
                             </li>
-                            <li><a class="J_menuItem" href="basic_gallery.html">添加管理员</a>
+                            <li><a class="J_menuItem" href="/auth/add">添加管理员</a>
                             </li>
                         </ul>
                     </li>
@@ -352,7 +352,7 @@
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem"  href="/role">角色列表</a>
                             </li>
-                            <li><a class="J_menuItem" href="basic_gallery.html">添加角色</a>
+                            <li><a class="J_menuItem" href="/role/add">添加角色</a>
                             </li>
                         </ul>
                     </li>

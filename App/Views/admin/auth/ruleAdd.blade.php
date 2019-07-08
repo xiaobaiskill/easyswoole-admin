@@ -4,25 +4,32 @@
 
 @section('javascriptFooter')
 <script>
+
 layui.use('form', function(){
   var form = layui.form;
 
+  var form_field;
+
+  function callback(data) {
+    if(data.code != 0) {
+        layer.msg(info.msg);
+    } else {
+        layer.msg('添加成功', {time:1000}, function(){
+            form_field.form.reset();
+        });
+    }
+}
+
   //监听提交
   form.on('submit(submit)', function(data){
-  	data.field.menu = data.field.menu ? 1 : 0;
     data.field.status = data.field.status ? 1 : 0;
-    $.post('/rule/add',data.field,function(info){
-        if(info.code != 0) {
-    		layer.msg(info.msg);
-    	} else {
-    		layer.msg('添加成功',{time:2000});
-    		if(data.field.menu == 1) {
-    			location.href = '/rule/add';
-    		} else {
-    			data.form.reset();
-    		}
-    	}
-    });
+    form_field = data;
+    @if(isset($id))
+        post('/rule/add/{{$id}}', data.field, callback);
+    @else
+        post('/rule/add', data.field, callback);
+    @endif
+
     return false;
   });
 });

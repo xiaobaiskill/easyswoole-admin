@@ -10,14 +10,11 @@ layui.use('form', function(){
 		"name": "{{ $info['name'] }}"
 		,"node": "{{ $info['node'] }}"
 		,"status": {{ $info['status'] }}
-		,"menu": {{ $info['menu'] }}
-		,"pid": "{{ $info['pid'] }}"
 	});
 
 
 	//监听提交
 	form.on('submit(submit)', function(data){
-		data.field.menu = data.field.menu ? 1 : 0;
 		data.field.status = data.field.status ? 1 : 0;
 		$.post('/rule/edit/'+{{ $info['id'] }},data.field,function(info){
 		    if(info.code != 0) {

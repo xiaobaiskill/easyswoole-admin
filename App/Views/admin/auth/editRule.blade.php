@@ -12,14 +12,15 @@
 @section('javascriptFooter')
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-var arr = [];
+var rules = [], rules_checked =[];
 function getCheck(data)
 {
     for(var x in data) {
+        rules.push(data[x].id);
         if(data[x].children){
             getCheck(data[x].children)
         } else {
-            arr.push(data[x].id);
+            rules_checked.push(data[x].id);
         }
     }
 }
@@ -29,8 +30,10 @@ function callback(data)
     if(data.code !== 0) {
         layer.msg(data.msg);
     } else {
-        layer.msg('变更成功',{time:2000});
-        parent.layer.close(parent.layer.getFrameIndex(window.name)); //再执行关闭
+        layer.msg('变更成功',{time:1000}, function(){
+            parent.layer.close(parent.layer.getFrameIndex(window.name)); //再执行关闭
+        });
+
     }
 }
 
@@ -56,7 +59,7 @@ layui.use(['tree', 'util'], function(){
 		var checkedData = tree.getChecked('rules'); //获取选中节点的数据
         getCheck(checkedData);
 
-        let datajson = {'rules' : arr };
+        let datajson = {'rules_checked':rules_checked, 'rules' : rules };
         post('/role/edit_rule/{{$id}}', datajson, callback)
         arr = [];
     }

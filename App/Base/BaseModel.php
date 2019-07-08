@@ -207,7 +207,7 @@ abstract class BaseModel
     public function delId($id, $del = false)
     {
         if($del){
-            return $this->where('id',$id)->delete();
+            return $this->where('id',$id)->delete(1);
         } else {
             return $this->where('id',$id)->setValue('deleted',1);
         }
