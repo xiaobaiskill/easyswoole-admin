@@ -5,11 +5,14 @@ namespace App\Base;
 use EasySwoole\EasySwoole\Config;
 
 use App\Model\AdminAuth as AuthModel;
+use App\Model\AdminLog as LogModel;
 
 use easySwoole\Cache\Cache;
 class AdminController extends BaseController
 {
 	protected $auth;
+
+	// 检查token 是否合法
 	private function checkToken()
 	{
 		$r = $this->request();
@@ -25,9 +28,23 @@ class AdminController extends BaseController
 			return false;
 		}
 	}
+
+	// 操作记录
+	protected function Record()
+	{
+		$data = [
+			'url'  => $this->request()->getUri()->getPath(),
+			'data' => json_encode($this->request()->getParsedBody()),
+			'uid'  => $this->auth['id']
+		];
+		LogModel::getInstance()->insert($data);
+		return true;
+	}
+
+
 	public function onRequest(?string $action): ?bool
 	{
-		// return $this->checkToken();
+		// return $this->checkToken() && $this->Record();
 		return true;
 	}
 
