@@ -6,18 +6,18 @@ use EasySwoole\Mysqli\Mysqli;
 
 class MysqlObject extends Mysqli implements PoolObjectInterface
 {
-    function gc()
+    public function gc()
     {
         $this->resetDbStatus();
         $this->getMysqlClient()->close();
     }
 
-    function objectRestore()
+    public function objectRestore()
     {
         $this->resetDbStatus();
     }
 
-    function beforeUse(): bool
+    public function beforeUse(): bool
     {
         return $this->getMysqlClient()->connected;
     }

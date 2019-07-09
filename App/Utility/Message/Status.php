@@ -8,11 +8,10 @@
 
 namespace App\Utility\Message;
 
-
 class Status
 {
-    // Informational 1xx
-    const CODE_OK = 0;     		// 成功
-    const CODE_ERR = -1; 		// 失败
-    const CODE_VERIFY_ERR = -2; 		// 验证码错误
+                                // Informational 1xx
+    const CODE_OK         = 0;  // 成功
+    const CODE_ERR        = -1; // 失败
+    const CODE_VERIFY_ERR = -2; // 验证码错误
 }

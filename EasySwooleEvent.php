@@ -72,9 +72,6 @@ class EasySwooleEvent implements Event
 
         // cache -- file redis memcache
         $conf = Config::getInstance()->getConf('app.cache');
-        // $type = Config::getInstance()->getConf('app.cache.type');
-        // $class ="\\easySwoole\\Cache\\Connector\\{$type}";
-        // $connector = new $class($conf);
         Cache::init($conf);
 
     }
