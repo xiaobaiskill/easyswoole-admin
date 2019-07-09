@@ -154,9 +154,7 @@ class Role extends AdminController
 		$info = $this->request()->getRequestParam('id','rules_checked', 'rules');
 
 		$id = $info['id'];
-		$rules_checked = implode(',', $info['rules_checked']);
-		$rules = implode(',', $info['rules']);
-		if(RoleModel::getInstance()->saveIdData($id, ['rules_checked' => $rules_checked,'rules' => $rules])) {
+		if(RoleModel::getInstance()->saveIdRules($id, $info['rules_checked'], $info['rules'])) {
 			$this->writeJson(Status::CODE_OK);
 		} else {
 			$this->writeJson(Status::CODE_ERR,'删除失败');

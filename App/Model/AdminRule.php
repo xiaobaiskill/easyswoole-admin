@@ -12,7 +12,7 @@ class AdminRule extends BaseModel
 	{
 		return $this->orderBy('created_at','ASC')
 					->get([($page-1) * $page, $limit]
-					, "id, name, node, menu, status, created_at");
+					, "id, name, node, status, created_at");
 	}
 
 	// 查找pid 为 0 的数据
@@ -26,5 +26,10 @@ class AdminRule extends BaseModel
 	public function saveIdData($id,$data)
 	{
 		return $this->where('id',$id)->update($data);
+	}
+
+	public function getIdsInNode($ids)
+	{
+		return $this->whereIn('id',$ids)->where('status',1)->getColumn('node');
 	}
 }

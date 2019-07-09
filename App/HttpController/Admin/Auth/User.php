@@ -10,10 +10,6 @@ use App\Utility\Log\Log;
 use App\Model\AdminAuth as AuthModel;
 use App\Model\AdminRole as RoleModel;
 
-use App\Common\AppFunc;
-
-use EasySwoole\EasySwoole\Config;
-
 class User extends AdminController
 {
 	public function index()
@@ -27,7 +23,7 @@ class User extends AdminController
 		$data = $this->getPage();
 
 		$auth_data = AuthModel::getInstance()
-						->findAll($data['page'],$data['limit']);
+						->findAll($data['page'], $data['limit']);
 
 		$auth_count = AuthModel::getInstance()->where('deleted',0,'=')->count();
 		$data = ['code'=>Status::CODE_OK,'count'=>$auth_count,'data'=>$auth_data];
@@ -51,7 +47,6 @@ class User extends AdminController
 			$this->writeJson(Status::CODE_ERR,'请勿乱操作');
 			return ;
 		}
-
 		return $data;
 	}
 
@@ -68,23 +63,46 @@ class User extends AdminController
 		if(!$data) {
 			return ;
 		}
-		$data['encry'] = AppFunc::getRandomStr(6);
-		$encry = Config::getInstance()->getConf('app.verify');
-		$data['pwd'] = md5($data['encry'] . $data['pwd'] . $encry);
-		if(AuthModel::getInstance()->insert($data)){
+
+		if(AuthModel::getInstance()->add($data)){
 			$this->writeJson(Status::CODE_OK);
 		} else {
 			$this->writeJson(Status::CODE_ERR,'添加失败');
 			Log::getInstance()->error( "user--addData:" . json_encode($data, JSON_UNESCAPED_UNICODE) . "添加失败");
-
 		}
 
 		return ;
 	}
 
 	// 多字段修改
-	public function save()
+	public function edit()
 	{
+		$id = $this->request()->getRequestParam('id');
+		$role_data = RoleModel::getInstance()->get(null, 'id,name');
+		$user_data = AuthModel::getInstance()->find($id);
+		if(!$user_data){
+			$this->show404();
+			return ;
+		}
+		$this->render('admin.auth.userEdit',['id'=>$id, 'role_data'=>$role_data,'user_data'=>$user_data]);
+	}
+
+	// 多字段修改
+	public function editData()
+	{
+		$data = $this->fieldInfo();
+		if(!$data) {
+			return ;
+		}
+		$id = $this->request()->getRequestParam('id');
+
+		if(AuthModel::getInstance()->save($id, $data)){
+			$this->writeJson(Status::CODE_OK);
+		} else {
+			$this->writeJson(Status::CODE_ERR,'修改失败');
+			Log::getInstance()->error( "user--editData:" . json_encode($data, JSON_UNESCAPED_UNICODE) . "修改失败");
+		}
+
 		return ;
 	}
 
@@ -96,7 +114,7 @@ class User extends AdminController
 		$validate = new \EasySwoole\Validate\Validate();
 
 		$validate->addColumn('key')->required()->func(function($params, $key) {
-		    return $params instanceof \EasySwoole\Spl\SplArray && $key == 'key' && in_array($params[$key], ['display_name','status']);
+		    return $params instanceof \EasySwoole\Spl\SplArray && $key == 'key' && in_array($params[$key], ['display_name','status', 'uname']);
 		}, '请勿乱操作');
 
 		$validate->addColumn('id')->required();

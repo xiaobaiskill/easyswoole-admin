@@ -6,14 +6,19 @@
 <script>
 layui.use('form', function(){
 	var form = layui.form, $ = layui.jquery,form_field;
-
+	form.val("form", {
+      "uname": "{{ $user_data['uname'] }}",
+      "role_id": {{ $user_data['role_id'] }},
+      "display_name": "{{ $user_data['display_name'] }}",
+      "status": {{ $user_data['status'] }},
+    });
 
 	function callback(data)
 	{
 		if(data.code != 0) {
 	        layer.msg(data.msg);
 	    } else {
-	        layer.msg('添加成功',{time:1000},function(){
+	        layer.msg('修改成功',{time:1000},function(){
 	            location.href = '/auth';
 	        });
 
@@ -37,7 +42,8 @@ layui.use('form', function(){
 		form_field = data;
 		delete data.field.verify_pwd;
 		data.field.status = data.field.status ? 1 : 0;
-		post('/auth/add',data.field,callback);
+		console.log(data.field);
+		post('/auth/edit/{{$id}}',data.field,callback);
 		return false;
 	});
 });

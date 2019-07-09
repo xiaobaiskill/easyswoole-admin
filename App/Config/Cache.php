@@ -1,5 +1,5 @@
 <?php
-// 教程 https://packagist.org/packages/easyswoole/cache
+/*// 教程 https://packagist.org/packages/easyswoole/cache
 return [
 	'type' => 'Files',
 	'conf' => [
@@ -12,7 +12,7 @@ return [
         'thread_safe'   => false, // 线程安全模式
         'lock_timeout'  => 3000,  // 文件最长锁定时间(ms)
 	]
-];
+];*/
 
 
 /*

@@ -1,7 +1,7 @@
 基于 easyswoole 二次开发
 ====
 
-#### 目录介绍
+#### 一、目录介绍
 ```
 App
   |- Base                     // 基础类文件
@@ -9,6 +9,7 @@ App
       |- BaseController.php     // 最基础的 controller 类
       |- BaseModel.php          // 最基础的model 类
   |- Config                   // 关于App 项目的配置
+  |- Common                   // 公共函数
   |- HttpController           // 控制器类文件夹
       |- Router.php             // 路由文件
       |- Web                    // web模块
@@ -28,14 +29,14 @@ App
 ```
 
 
-#### 环境
+#### 二、环境
 ```
 php >= 7.1
 swoole-4.3
 [composer 下载安装](https://www.cnblogs.com/xiaobaiskill/p/11003514.html)
 ```
 
-#### 安装
+#### 三、安装
 ```
 * composer config -g repo.packagist composer https://packagist.laravel-china.org
 
@@ -54,8 +55,8 @@ swoole-4.3
 
 
 
-#### 设置
-* nginx 设置静态资源
+#### 四、设置
+* 4.1 nginx 配置
 ```
 location / {
       rewrite ^/(.*)$ /admin/$1 break;
@@ -65,19 +66,19 @@ location / {
       proxy_set_header   X-Real-IP        $remote_addr;
       proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
   }
-location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|woff2|woff|ttf)$
+location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|woff2|woff|ttf|ico)$
 {
     root /path/to/App/Static;  // 写这个项目静态文件夹的绝对地址
     expires      30d;
 }
-location ~ .*\.(js|css)?$
+location ~ .*\.(js|css|map)?$
 {
     root /path/to/App/Static; // 写这个项目静态文件夹的绝对地址
     expires      12h;
 }
 
 ```
-* db 配置文件
+* 4.2 db 配置文件
 ```
 在App/Config 目录下添加文件 Database.php
 
@@ -104,7 +105,7 @@ return [
 ?>
 ```
 
-#### 启动
+#### 五、启动
 ```
 // 测试环境启动
 * php easyswoole start d   // 守护模式启动   默认加载 dev.php 文件
@@ -114,7 +115,7 @@ return [
 php easyswoole start  produce d   // 加载produce.php 文件
 ```
 
-#### 规范
+#### 六、规范
 
 * 类名
 `大驼峰 （如： IndexController  BaseModel）`
@@ -128,7 +129,7 @@ php easyswoole start  produce d   // 加载produce.php 文件
 
 
 
-#### 其他
+#### 七、其他
 ```
 [cache](https://packagist.org/packages/easyswoole/cache)
 

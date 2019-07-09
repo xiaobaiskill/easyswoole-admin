@@ -13,14 +13,16 @@ class Router extends AbstractRouter
     {
         // 未找到路由对应的方法
         $this->setMethodNotAllowCallBack(function (Request $request, Response $response) {
-            var_dump(111);
+            var_dump('未找到路由对应的方法');
+            var_dump($request->getUri()->getPath());
             $response->write(Render::getInstance()->render('default.404'));
             $response->withStatus(404);
         });
 
         // 未找到路由匹配
         $this->setRouterNotFoundCallBack(function (Request $request, Response $response) {
-            var_dump(222);
+            var_dump('未找到路由匹配');
+            var_dump($request->getUri()->getPath());
             $response->write(Render::getInstance()->render('default.404'));
             $response->withStatus(404);
         });
@@ -29,6 +31,10 @@ class Router extends AbstractRouter
         $routes->addGroup('/admin', function (RouteCollector $route) {
             $route->get('/','/Admin/Index');
             $route->get('/index_context','/Admin/Index/indexContext');
+            $route->get('/login','/Admin/Login');
+            $route->post('/logout','/Admin/Login/logout');
+            $route->post('/login','/Admin/Login/login');
+            $route->get('/verify','/Admin/Login/verify');
 
             // 管理员
             $route->addGroup('/auth',function(RouteCollector $r){
@@ -37,6 +43,9 @@ class Router extends AbstractRouter
 
                 $r->get('/add','/Admin/Auth/User/add');
                 $r->post('/add','/Admin/Auth/User/addData');
+
+                $r->get('/edit/{id:\d+}','/Admin/Auth/User/edit');
+                $r->post('/edit/{id:\d+}','/Admin/Auth/User/editData');
 
                 $r->post('/set/{id:\d+}','/Admin/Auth/User/set');
                 $r->post('/del/{id:\d+}','/Admin/Auth/User/del');

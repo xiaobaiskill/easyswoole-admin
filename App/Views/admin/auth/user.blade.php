@@ -49,8 +49,9 @@ layui.use('table', function(){
     ,title: '用户数据表'
     ,cols: [[
       {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-      ,{field:'uname', title:'用户名', width:120}
+      ,{field:'uname', title:'用户名', width:120 , event:'edit_uname'}
       ,{field:'display_name', title:'真实用户名', event:'edit_name'}
+      ,{field:'role_name', title:'所属组'}
       ,{field:'created_at', title:'创建时间', }
       ,{field:'logined_at', title:'最近登录时间'}
       ,{field:'status', title:'状态', templet: '#switchTpl', unresize: true}
@@ -63,7 +64,7 @@ layui.use('table', function(){
     table.on('toolbar(test)', function(obj){
         switch(obj.event){
             case 'add':
-                location.href="/admin";
+                location.href="/auth/add";
             break;
         };
     });
@@ -96,7 +97,24 @@ layui.use('table', function(){
                 });
             });
         } else if(event === 'edit'){
-            return ;
+            location.href = '/auth/edit/' + data.id;
+        } else if(event = 'edit_uname'){
+            layer.prompt({
+                formType: 2
+                ,value: data.uname
+            }, function(value, index){
+                layer.close(index);
+                let datajson = {key:'uname', value:value};
+                $.post('/auth/set/' + data.id ,datajson,function(data){
+                    if(data.code != 0) {
+                        layer.msg(data.msg);
+                    } else {
+                        obj.update({
+                          uname: value
+                        });
+                    }
+                });
+            });
         } else if(event = 'edit_name') {
             layer.prompt({
                 formType: 2

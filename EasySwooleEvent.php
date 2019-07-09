@@ -71,13 +71,12 @@ class EasySwooleEvent implements Event
         Render::getInstance()->attachServer(ServerManager::getInstance()->getSwooleServer());
 
         // cache -- file redis memcache
-        /*
-        $conf = Config::getInstance()->getConf('cache.conf');
-        $type = Config::getInstance()->getConf('cache.type');
-        $class ="\\easySwoole\\Cache\\Connector\\{$type}";
-        $connector = new $class($conf);
-        Cache::init($connector);
-        */
+        $conf = Config::getInstance()->getConf('app.cache');
+        // $type = Config::getInstance()->getConf('app.cache.type');
+        // $class ="\\easySwoole\\Cache\\Connector\\{$type}";
+        // $connector = new $class($conf);
+        Cache::init($conf);
+
     }
 
     public static function onRequest(Request $request, Response $response): bool

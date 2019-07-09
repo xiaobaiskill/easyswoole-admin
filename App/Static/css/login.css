@@ -29,7 +29,6 @@ body.signin {
 }
 
 .signinpanel .form-control {
-    display: block;
     margin-top: 15px;
 }
 
@@ -40,6 +39,7 @@ body.signin {
 .signinpanel .pword {
     background: #fff url(../img/locked.png) no-repeat 95% center;color:#333;
 }
+
 
 .signinpanel .btn {
     margin-top: 15px;
@@ -58,6 +58,12 @@ body.signin {
 }
 
 .signup-footer{border-top: solid 1px rgba(255,255,255,.3);margin:20px 0;padding-top: 15px;}
+
+
+.verify {
+    margin-top: 15px;
+}
+
 
 @media screen and (max-width: 768px) {
     .signinpanel,

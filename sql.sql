@@ -37,3 +37,22 @@ CREATE TABLE if not exists `admin_rule` (
   KEY node(`node`),
   KEY `status_node` (`status`,`node`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='权限点和菜单列表';
+
+
+CREATE TABLE if not exists `admin_log` (
+	`id` int(10) unsigned not null auto_increment,
+	`url` varchar(50) not null DEFAULT '' comment '操作url',
+	`data` text comment '信息',
+	`uid` int(10) comment '操作人',
+	`created_at` timestamp default current_timestamp,
+	PRIMARY KEY(`id`)
+) engine=MyISAM default CHARSET=utf8mb4 comment='操作记录表';
+
+
+CREATE TABLE if not exists `admin_login_log`(
+	`id` int(10) unsigned not null auto_increment,
+	`uname` varchar(20) comment '登录人',
+	`status` tinyint(1) default '0' comment '是否登录 1 登录成功，0失败',
+	`created_at` timestamp default current_timestamp,
+	PRIMARY KEY(`id`)
+)engine=MyISAM default CHARSET=utf8mb4 comment='登录日志记录表';
