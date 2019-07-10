@@ -55,8 +55,8 @@ class AdminController extends BaseController
 
 	public function onRequest(?string $action): ?bool
 	{
-		return $this->checkToken() && $this->Record();
-		// return true;
+		// return $this->checkToken() && $this->Record();
+		return true;
 	}
 
 	public function dataJson($data)
