@@ -4,10 +4,12 @@ namespace App\HttpController\Admin;
 
 use App\Base\BaseController;
 use App\Model\AdminAuth as AuthModel;
+use App\Model\AdminRole as RoleModel;
 use App\Model\AdminLoginLog as LoginLogModel;
 use App\Utility\Message\Status;
 use EasySwoole\EasySwoole\Config;
 use EasySwoole\VerifyCode\Conf;
+use easySwoole\Cache\Cache;
 
 class Login extends BaseController
 {
@@ -43,6 +45,9 @@ class Login extends BaseController
             $this->response()->setCookie('token', $token);
             $this->writeJson(Status::CODE_OK, '登录成功');
             LoginLogModel::getInstance()->add($data['uname'], 1);
+            if(!Cache::has('role_' . $bool['role_id'])) {
+                RoleModel::getInstance()->cacheRules($bool['role_id']);
+            }
         } else {
             $this->writeJson(Status::CODE_ERR, '用户或密码错误');
             LoginLogModel::getInstance()->add($data['uname']);

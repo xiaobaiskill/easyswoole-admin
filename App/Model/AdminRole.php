@@ -25,12 +25,17 @@ class AdminRole extends BaseModel
     public function saveIdRules($id, $rules_checked, $rules)
     {
         if ($this->saveIdData($id, ['rules_checked' => implode(',', $rules_checked), 'rules' => implode(',', $rules)])) {
-            $rules = RuleModel::getInstance()->getIdsInNode($rules);
-            Cache::set('role_' . $id, $rules);
+            $this->cacheRules($id);
             return true;
         } else {
             return false;
         }
+    }
 
+    public function cacheRules($id)
+    {
+        $data = $this->find($id);
+        $rules = RuleModel::getInstance()->getIdsInNode($data['rules']);
+        Cache::set('role_' . $id, $rules);
     }
 }

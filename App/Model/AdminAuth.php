@@ -37,22 +37,21 @@ class AdminAuth extends BaseModel
     public function login($uname, $pwd)
     {
         $data  = $this->findUname($uname);
-        $encry = Config::getInstance()->getConf('app.verify');
+        return $this->pwdEncry($pwd, $data['encry']) == $data['pwd'] ? $data : false;
         return md5($data['encry'] . $pwd . $encry) == $data['pwd'] ? $data : false;
     }
 
     private function pwdEncry($pwd, $rand)
     {
         $encry = Config::getInstance()->getConf('app.verify');
-        return md5($data['encry'] . $data['pwd'] . $encry);
+        return md5($rand . $pwd . $encry);
     }
 
     // $data = ['uname', 'pwd', 'status', 'display_name', 'role_id']; 必须
     public function add($data)
     {
         $data['encry'] = AppFunc::getRandomStr(6);
-        $encry         = Config::getInstance()->getConf('app.verify');
-        $data['pwd']   = $this->pwdEncry($data['pwd'], $encry);
+        $data['pwd']   = $this->pwdEncry($data['pwd'], $data['encry']);
         return $this->insert($data);
     }
 
@@ -60,8 +59,7 @@ class AdminAuth extends BaseModel
     public function save($id, $data)
     {
         $data['encry'] = AppFunc::getRandomStr(6);
-        $encry         = Config::getInstance()->getConf('app.verify');
-        $data['pwd']   = $this->pwdEncry($data['pwd'], $encry);
+        $data['pwd']   = $this->pwdEncry($data['pwd'], $data['encry']);
         return $this->saveIdData($id, $data);
     }
 }
