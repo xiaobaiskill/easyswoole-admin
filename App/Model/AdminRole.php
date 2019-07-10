@@ -60,6 +60,7 @@ EOF;
     {
         if($this->delId($id, true)) {
             @unlink($this->role_group_dir . 'RoleGroup' . $id . '.php');
+            Cache::delete('role_' . $id);
             return true;
         }
 

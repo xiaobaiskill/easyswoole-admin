@@ -2,6 +2,9 @@
 
 namespace App\Common;
 
+
+use easySwoole\Cache\Cache;
+
 class AppFunc
 {
     // 二维数组 转 tree
@@ -84,8 +87,20 @@ class AppFunc
         return $str;
     }
 
-    public function hasRule($rule) {
-        return ;
+    private static $rules = [];
+
+    // 只需执行一次即可。用于 初始化不同角色的所有权限
+    public static function initRule($role_id)
+    {
+        try{
+            self::$rules = Cache::get('role_' . $role_id);
+        }catch(Exception $e) {
+            return ;
+        }
+        
+    }
+    public static function hasRule($rule) {
+        return is_array($rule, self::$rules);
     }
 
 }

@@ -8,6 +8,7 @@ use App\Model\AdminAuth as AuthModel;
 use App\Model\AdminLog as LogModel;
 
 use easySwoole\Cache\Cache;
+use App\Common\AppFunc;
 class AdminController extends BaseController
 {
 	protected $auth;   // 保存了登录用户的信息
@@ -23,11 +24,11 @@ class AdminController extends BaseController
 		$token = md5( $id . Config::getInstance()->getConf('app.token') . $time);
 		if($r->getCookieParams('token') == $token) {
 			$this->auth = AuthModel::getInstance()->find($id);
-			
+			AppFunc::initRule($this->auth['role_id']);
 			// 如果 用户组类 被删除的话则使用,则使用 根用户组(RoleGroup)
 			try {
-				$role_group = 'RoleGroup' . $this->role_id;
-			    $class ="\\App\\Utility\\RoleGroup\\{role_group}";
+				$role_group = 'RoleGroup' . $this->auth['role_id'];
+			    $class ="\\App\\Utility\\RoleGroup\\{$role_group}";
 				$this->role_group = new $class();
 			} catch (Exception $e) {
 			    $this->role_group = new \App\Utility\RoleGroup\RoleGroup();
@@ -51,6 +52,9 @@ class AdminController extends BaseController
 		LogModel::getInstance()->insert($data);
 		return true;
 	}
+
+	
+
 
 
 	public function onRequest(?string $action): ?bool
