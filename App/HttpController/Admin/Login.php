@@ -57,6 +57,8 @@ class Login extends BaseController
 
     public function logout()
     {
+        $this->response()->setCookie('token', '');
+        $this->response()->redirect("/login");
         return;
     }
 

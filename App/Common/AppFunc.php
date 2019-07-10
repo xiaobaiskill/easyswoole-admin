@@ -84,4 +84,8 @@ class AppFunc
         return $str;
     }
 
+    public function hasRule($rule) {
+        return ;
+    }
+
 }

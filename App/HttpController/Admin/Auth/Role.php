@@ -58,7 +58,7 @@ class Role extends AdminController
             return;
         }
 
-        if (RoleModel::getInstance()->insert($data)) {
+        if (RoleModel::getInstance()->add($data)) {
             $this->writeJson(Status::CODE_OK);
         } else {
             $this->writeJson(Status::CODE_ERR, '添加失败');
@@ -125,7 +125,7 @@ class Role extends AdminController
     {
         $request = $this->request();
         $id      = $request->getRequestParam('id');
-        $bool    = RoleModel::getInstance()->delId($id, true);
+        $bool    = RoleModel::getInstance()->delToId($id);
         if ($bool) {
             $this->writeJson(Status::CODE_OK, '');
         } else {

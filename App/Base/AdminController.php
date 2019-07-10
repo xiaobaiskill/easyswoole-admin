@@ -10,7 +10,8 @@ use App\Model\AdminLog as LogModel;
 use easySwoole\Cache\Cache;
 class AdminController extends BaseController
 {
-	protected $auth;
+	protected $auth;   // 保存了登录用户的信息
+	protected $role_group;
 
 	// 检查token 是否合法
 	private function checkToken()
@@ -22,6 +23,16 @@ class AdminController extends BaseController
 		$token = md5( $id . Config::getInstance()->getConf('app.token') . $time);
 		if($r->getCookieParams('token') == $token) {
 			$this->auth = AuthModel::getInstance()->find($id);
+			
+			// 如果 用户组类 被删除的话则使用,则使用 根用户组(RoleGroup)
+			try {
+				$role_group = 'RoleGroup' . $this->role_id;
+			    $class ="\\App\\Utility\\RoleGroup\\{role_group}";
+				$this->role_group = new $class();
+			} catch (Exception $e) {
+			    $this->role_group = new \App\Utility\RoleGroup\RoleGroup();
+			}
+			
 			return true;
 		} else {
 			$this->response()->redirect("/login");
