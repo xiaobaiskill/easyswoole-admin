@@ -45,6 +45,7 @@ class Login extends BaseController
             $this->response()->setCookie('token', $token);
             $this->writeJson(Status::CODE_OK, '登录成功');
             LoginLogModel::getInstance()->add($data['uname'], 1);
+            AuthModel::getInstance()->setLoginedTime($id);
             if(!Cache::has('role_' . $bool['role_id'])) {
                 RoleModel::getInstance()->cacheRules($bool['role_id']);
             }

@@ -10,13 +10,22 @@ use App\Utility\Message\Status;
 
 class Rule extends AdminController
 {
+    private $rule_rule      = 'auth.rule';
+    private $rule_rule_view = 'auth.rule.view';
+    private $rule_rule_add  = 'auth.rule.add';
+    private $rule_rule_set  = 'auth.rule.set';
+    private $rule_rule_del  = 'auth.rule.del';
     public function index()
     {
+        if(!$this->hasRuleForGet($this->rule_rule_view)) return ;
+
         $this->render('admin.auth.rule');
     }
 
     public function getAll()
     {
+        if(!$this->hasRuleForPost($this->rule_rule_view)) return ;
+
         $rule_data = RuleModel::getInstance()->get();
 
         $tree_data = AppFunc::arrayToTree($rule_data, 'pid');
@@ -48,11 +57,15 @@ class Rule extends AdminController
 
     public function add()
     {
+        if(!$this->hasRuleForGet($this->rule_rule_add)) return ;
+
         $this->render('admin.auth.ruleAdd');
     }
 
     public function addData()
     {
+        if(!$this->hasRuleForPost($this->rule_rule_add)) return ;
+
         $data = $this->fieldInfo();
         if (!$data) {
             return;
@@ -67,12 +80,17 @@ class Rule extends AdminController
 
     public function addChild()
     {
+
+        if(!$this->hasRuleForGet($this->rule_rule_add)) return ;
+
         $id = $this->request()->getRequestParam('id');
         $this->render('admin.auth.ruleAdd', ['id' => $id]);
     }
 
     public function addChildData()
     {
+        if(!$this->hasRuleForPost($this->rule_rule_add)) return ;
+
         $data = $this->fieldInfo();
         if (!$data) {
             return;
@@ -91,6 +109,8 @@ class Rule extends AdminController
     // 修改数据的页面
     public function edit()
     {
+        if(!$this->hasRuleForGet($this->rule_rule_set)) return ;
+
         $id = $this->request()->getRequestParam('id');
 
         if (!$id) {
@@ -111,6 +131,8 @@ class Rule extends AdminController
     // 修改数据
     public function editData()
     {
+        if(!$this->hasRuleForPost($this->rule_rule_set)) return ;
+
         $data = $this->fieldInfo();
         if (!$data) {
             return;
@@ -129,6 +151,8 @@ class Rule extends AdminController
     // 单字段修改
     public function set()
     {
+        if(!$this->hasRuleForPost($this->rule_rule_set)) return ;
+
         $request  = $this->request();
         $data     = $request->getRequestParam('id', 'key', 'value');
         $validate = new \EasySwoole\Validate\Validate();
@@ -159,6 +183,8 @@ class Rule extends AdminController
 
     public function del()
     {
+        if(!$this->hasRuleForPost($this->rule_rule_del)) return ;
+
         $request = $this->request();
         $id      = $request->getRequestParam('id');
         $bool    = RuleModel::getInstance()->delId($id, true);

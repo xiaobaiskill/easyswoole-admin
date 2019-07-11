@@ -11,13 +11,22 @@ use App\Utility\Message\Status;
 
 class Role extends AdminController
 {
+    private $rule_role      = 'auth.role';
+    private $rule_role_view = 'auth.role.view';
+    private $rule_role_add  = 'auth.role.add';
+    private $rule_role_set  = 'auth.role.set';
+    private $rule_role_del  = 'auth.role.del';
     public function index()
     {
+        if(!$this->hasRuleForGet($this->rule_role_view)) return ;
+
         $this->render('admin.auth.role');
     }
 
     public function getAll()
     {
+        if(!$this->hasRuleForPost($this->rule_role_view)) return ;
+
         $data = $this->getPage();
 
         $role_data = RoleModel::getInstance()
@@ -48,11 +57,15 @@ class Role extends AdminController
 
     public function add()
     {
+        if(!$this->hasRuleForGet($this->rule_role_add)) return ;
+
         $this->render('admin.auth.roleAdd');
     }
 
     public function addData()
     {
+        if(!$this->hasRuleForPost($this->rule_role_add)) return ;
+
         $data = $this->fieldInfo();
         if (!$data) {
             return;
@@ -68,6 +81,8 @@ class Role extends AdminController
 
     public function edit()
     {
+        if(!$this->hasRuleForGet($this->rule_role_set)) return ;
+
         $id = $this->request()->getRequestParam('id');
 
         $info = RoleModel::getInstance()->find($id, 'name, detail');
@@ -76,6 +91,8 @@ class Role extends AdminController
 
     public function editData()
     {
+        if(!$this->hasRuleForPost($this->rule_role_set)) return ;
+
         $data = $this->fieldInfo();
         if (!$data) {
             return;
@@ -93,6 +110,8 @@ class Role extends AdminController
 
     public function set()
     {
+        if(!$this->hasRuleForPost($this->rule_role_set)) return ;
+
         $request  = $this->request();
         $data     = $request->getRequestParam('id', 'key', 'value');
         $validate = new \EasySwoole\Validate\Validate();
@@ -123,6 +142,8 @@ class Role extends AdminController
 
     public function del()
     {
+        if(!$this->hasRuleForPost($this->rule_role_del)) return ;
+
         $request = $this->request();
         $id      = $request->getRequestParam('id');
         $bool    = RoleModel::getInstance()->delToId($id);
@@ -136,6 +157,8 @@ class Role extends AdminController
 
     public function editRule()
     {
+        if(!$this->hasRuleForGet($this->rule_role_view)) return ;
+
         $rule_data = RuleModel::getInstance()->get(null, 'id, name as title, pid');
         $data      = AppFunc::arrayToTree($rule_data);
 
@@ -146,6 +169,8 @@ class Role extends AdminController
 
     public function editRuleData()
     {
+        if(!$this->hasRuleForPost($this->rule_role_view)) return ;
+
         $info = $this->request()->getRequestParam('id', 'rules_checked', 'rules');
 
         $id = $info['id'];

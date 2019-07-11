@@ -62,4 +62,9 @@ class AdminAuth extends BaseModel
         $data['pwd']   = $this->pwdEncry($data['pwd'], $data['encry']);
         return $this->saveIdData($id, $data);
     }
+
+    public function setLoginedTime($id)
+    {
+        return $this->where('id', $id)->setValue('logined_at', date('Y-m-d H:i:s'));
+    }
 }

@@ -97,10 +97,10 @@ class AppFunc
         }catch(Exception $e) {
             return ;
         }
-        
     }
     public static function hasRule($rule) {
-        return is_array($rule, self::$rules);
+        return in_array($rule, self::$rules);
+        // return true;
     }
 
 }

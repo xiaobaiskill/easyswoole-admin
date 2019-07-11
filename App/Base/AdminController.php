@@ -9,6 +9,7 @@ use App\Model\AdminLog as LogModel;
 
 use easySwoole\Cache\Cache;
 use App\Common\AppFunc;
+use App\Utility\Massage\Status;
 class AdminController extends BaseController
 {
 	protected $auth;   // 保存了登录用户的信息
@@ -33,7 +34,7 @@ class AdminController extends BaseController
 			} catch (Exception $e) {
 			    $this->role_group = new \App\Utility\RoleGroup\RoleGroup();
 			}
-			
+
 			return true;
 		} else {
 			$this->response()->redirect("/login");
@@ -53,14 +54,32 @@ class AdminController extends BaseController
 		return true;
 	}
 
-	
+	// get 请求是否有权限访问
+	public function  hasRuleForGet($rule)
+	{
+		if(!AppFunc::hasRule($rule)) {
+			$this->show404();
+			return false;
+		}
 
+		return true;
+	}
+
+	// post 请求是否有权限访问
+	public function  hasRuleForpost($rule)
+	{
+		if(!AppFunc::hasRule($rule)) {
+			$this->writeJson(Status::CODE_RULE_ERR,'权限不足');
+			return false;
+		}
+		return true;
+	}
 
 
 	public function onRequest(?string $action): ?bool
 	{
-		// return $this->checkToken() && $this->Record();
-		return true;
+		return $this->checkToken() && $this->Record();
+		// return true;
 	}
 
 	public function dataJson($data)
