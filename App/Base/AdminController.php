@@ -66,7 +66,7 @@ class AdminController extends BaseController
 	}
 
 	// post 请求是否有权限访问
-	public function  hasRuleForpost($rule)
+	public function  hasRuleForPost($rule)
 	{
 		if(!AppFunc::hasRule($rule)) {
 			$this->writeJson(Status::CODE_RULE_ERR,'权限不足');

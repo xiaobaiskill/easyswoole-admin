@@ -18,12 +18,15 @@ class User extends AdminController
     public function index()
     {
         if(!$this->hasRuleForGet($this->rule_auth_view)) return ;
+
         $this->render('admin.auth.user');
     }
 
     // 获取用户数
     public function getAll()
     {
+        if(!$this->hasRuleForPost($this->rule_auth_view)) return ;
+
         $data = $this->getPage();
 
         $auth_data = AuthModel::getInstance()

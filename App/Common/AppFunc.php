@@ -39,7 +39,14 @@ class AppFunc
         return $trees;
     }
 
-    // 规则 |--- 就分的
+    /**
+     * / 规则 |--- 就分的
+     * @param  [type] $tree_list [树 数组]
+     * @param  [type] &$tree     [返回的二维数组]
+     * @param  string $pre       [前缀]
+     * @param  string $child     [树 的子分支]
+     * @return [type]            [description]
+     */
     public static function treeRule($tree_list, &$tree, $pre = '', $child = 'children')
     {
         if (is_array($tree_list)) {
@@ -99,8 +106,11 @@ class AppFunc
         }
     }
     public static function hasRule($rule) {
+        if(empty($rule)) {
+            return true;
+        }
+
         return in_array($rule, self::$rules);
         // return true;
     }
-
 }

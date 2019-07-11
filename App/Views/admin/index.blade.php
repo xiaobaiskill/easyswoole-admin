@@ -340,51 +340,51 @@ use App\Common\AppFunc;
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">管理用户</span>
                     </li>
-                    @if(AppFunc::hasRule('auth.auth'))
-                        <li>
-                            <a href="#"><i class="fa fa-user"></i> <span class="nav-label">后台管理员</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                @if(AppFunc::hasRule('auth.auth.view'))
-                                    <li><a class="J_menuItem" href="/auth">管理员列表</a>
-                                    </li>
-                                @endif
-                                @if(AppFunc::hasRule('auth.auth.add'))
-                                    <li><a class="J_menuItem" href="/auth/add">添加管理员</a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </li>
-                    @endif
-                    @if(AppFunc::hasRule('auth.role'))
-                        <li>
-                            <a href="#"><i class="fa fa-users"></i> <span class="nav-label">角色管理</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                @if(AppFunc::hasRule('auth.role.view'))
-                                    <li><a class="J_menuItem"  href="/role">角色列表</a>
-                                    </li>
-                                @endif
-                                @if(AppFunc::hasRule('auth.role.add'))
-                                    <li><a class="J_menuItem" href="/role/add">添加角色</a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </li>
-                    @endif
-                    @if(AppFunc::hasRule('auth.rule'))
-                        <li>
-                            <a href="#"><i class="fa fa-key fa-fw"></i> <span class="nav-label">权限管理</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                @if(AppFunc::hasRule('auth.rule.view'))
-                                    <li><a class="J_menuItem" href="/rule">权限列表</a>
-                                    </li>
-                                @endif
-                                @if(AppFunc::hasRule('auth.rule.add'))
-                                    <li><a class="J_menuItem" href="/rule/add">添加权限</a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </li>
-                    @endif
+                        @if(AppFunc::hasRule('auth.auth'))
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label">后台管理员</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    @if(AppFunc::hasRule('auth.auth.view'))
+                                        <li><a class="J_menuItem" href="/auth">管理员列表</a>
+                                        </li>
+                                    @endif
+                                    @if(AppFunc::hasRule('auth.auth.add'))
+                                        <li><a class="J_menuItem" href="/auth/add">添加管理员</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
+                        @if(AppFunc::hasRule('auth.role'))
+                            <li>
+                                <a href="#"><i class="fa fa-users"></i> <span class="nav-label">角色管理</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    @if(AppFunc::hasRule('auth.role.view'))
+                                        <li><a class="J_menuItem"  href="/role">角色列表</a>
+                                        </li>
+                                    @endif
+                                    @if(AppFunc::hasRule('auth.role.add'))
+                                        <li><a class="J_menuItem" href="/role/add">添加角色</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
+                        @if(AppFunc::hasRule('auth.rule'))
+                            <li>
+                                <a href="#"><i class="fa fa-key fa-fw"></i> <span class="nav-label">权限管理</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    @if(AppFunc::hasRule('auth.rule.view'))
+                                        <li><a class="J_menuItem" href="/rule">权限列表</a>
+                                        </li>
+                                    @endif
+                                    @if(AppFunc::hasRule('auth.rule.add'))
+                                        <li><a class="J_menuItem" href="/rule/add">添加权限</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
                     @endif
 
 					<!-- 设置 -->
