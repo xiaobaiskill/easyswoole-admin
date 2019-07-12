@@ -12,9 +12,9 @@ abstract class BaseController extends Controller
         $this->actionNotFound('index');
     }
 
-    public function render(string $template, array $data = [], array $options = [])
+    public function render(string $template, array $data = [])
     {
-        $this->response()->write(Render::getInstance()->render($template, $data, $options));
+        $this->response()->write(Render::getInstance()->render($template, $data));
     }
 
     public function show404()

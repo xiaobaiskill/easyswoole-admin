@@ -14,6 +14,9 @@ create table if not exists `admin_auth` (
 	UNIQUE KEY(`uname`)
 ) engine=InnoDB default CHARSET=utf8mb4 COMMENT='后台管理员';
 
+INSERT INTO `admin_auth`(`id`, `uname`, `pwd`, `encry`, `role_id`, `display_name`, `status`, `deleted`) VALUES (1, 'admin', '617d19b72e725a05addf91d5430d240f', 'XK.?}<', 1, 'jmz', 1, 0);
+
+
 # 组
 create table if not exists `admin_role` (
 	`id` int(10) unsigned not null AUTO_INCREMENT,
@@ -24,6 +27,8 @@ create table if not exists `admin_role` (
 	`created_at` timestamp null default current_timestamp,
 	PRIMARY key(`id`)
 ) engine =InnoDB default charset=utf8mb4 comment= '组名';
+
+INSERT INTO `admin_role`(`id`, `name`, `detail`, `rules_checked`, `rules`) VALUES (1, '超级管理员', '网站建设者', '5,6,7,8,9,10,11,12,17,13,14,15,16', '1,2,5,6,7,8,3,9,10,11,12,17,4,13,14,15,16');
 
 # 权限
 CREATE TABLE if not exists `admin_rule` (
@@ -38,7 +43,24 @@ CREATE TABLE if not exists `admin_rule` (
   KEY `status_node` (`status`,`node`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='权限点和菜单列表';
 
-INSERT INTO `admin_rule` VALUES ('1', '管理用户', 'auth', '1', '0', '2019-07-10 17:53:07'), ('2', '后台管理', 'auth.auth', '1', '1', '2019-07-10 17:53:24'), ('3', '角色管理', 'auth.role', '1', '1', '2019-07-10 17:53:38'), ('4', '权限管理', 'auth.rule', '1', '1', '2019-07-10 17:53:55'), ('5', '查看管理列表', 'auth.auth.view', '1', '2', '2019-07-10 17:54:33'), ('6', '添加管理员', 'auth.auth.add', '1', '2', '2019-07-10 17:54:51'), ('7', '修改管理员', 'auth.auth.set', '1', '2', '2019-07-10 17:55:07'), ('8', '删除管理员', 'auth.auth.del', '1', '2', '2019-07-10 17:55:27'), ('9', '查看角色', 'auth.role.view', '1', '3', '2019-07-10 17:56:08'), ('10', '增加角色', 'auth.role.add', '1', '3', '2019-07-10 17:56:36'), ('11', '修改角色', 'auth.role.set', '1', '3', '2019-07-10 17:56:48'), ('12', '删除角色', 'auth.role.del', '1', '3', '2019-07-10 17:57:34'), ('13', '查看权限', 'auth.rule.view', '1', '4', '2019-07-10 17:57:58'), ('14', '增加权限', 'auth.rule.add', '1', '4', '2019-07-10 17:58:17'), ('15', '修改权限', 'auth.rule.set', '1', '4', '2019-07-10 17:59:13'), ('16', '删除权限', 'auth.rule.del', '1', '4', '2019-07-10 17:59:26');
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (1, '管理用户', 'auth', 1, 0);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (2, '后台管理', 'auth.auth', 1, 1);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (3, '角色管理', 'auth.role', 1, 1);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (4, '权限管理', 'auth.rule', 1, 1);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (5, '查看管理列表', 'auth.auth.view', 1, 2);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (6, '添加管理员', 'auth.auth.add', 1, 2);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (7, '修改管理员', 'auth.auth.set', 1, 2);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (8, '删除管理员', 'auth.auth.del', 1, 2);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (9, '查看角色', 'auth.role.view', 1, 3);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (10, '增加角色', 'auth.role.add', 1, 3);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (11, '修改角色', 'auth.role.set', 1, 3);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (12, '删除角色', 'auth.role.del', 1, 3);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (13, '查看权限', 'auth.rule.view', 1, 4);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (14, '增加权限', 'auth.rule.add', 1, 4);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (15, '修改权限', 'auth.rule.set', 1, 4);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (16, '删除权限', 'auth.rule.del', 1, 4);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (17, '变更权限', 'auth.role.rule', 1, 3);
+
 
 CREATE TABLE if not exists `admin_log` (
 	`id` int(10) unsigned not null auto_increment,

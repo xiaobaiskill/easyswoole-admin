@@ -1,3 +1,7 @@
+<?php
+use App\Common\AppFunc;
+?>
+
 @extends('layouts.admin')
 
 @section('stylesheet')
@@ -19,17 +23,22 @@
         </div>
         <button class="layui-btn layui-btn-sm" data-type="reload">搜索</button>
 
-        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加管理员</button>
-
+        @if(AppFunc::hasRule('auth.auth.add'))
+            <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加管理员</button>
+        @endif
     </script>
 
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        @if(AppFunc::hasRule('auth.auth.set'))
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        @endif
+        @if(AppFunc::hasRule('auth.auth.del'))
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        @endif
     </script>
 
     <script type="text/html" id="switchTpl">
-        <input type="checkbox" name="status" value="@{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="status" @{{ d.status == 1 ? 'checked' : '' }}>
+        <input type="checkbox" name="status" value="@{{d.id}}" lay-skin="switch" @if(!AppFunc::hasRule('auth.auth.set')) disabled="off" @endif lay-text="启用|禁用" lay-filter="status" @{{ d.status == 1 ? 'checked' : '' }}>
     </script>
 </div>
 @endsection
@@ -49,8 +58,8 @@ layui.use('table', function(){
     ,title: '用户数据表'
     ,cols: [[
       {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-      ,{field:'uname', title:'用户名', width:120 , event:'edit_uname'}
-      ,{field:'display_name', title:'真实用户名', event:'edit_name'}
+      ,{field:'uname', title:'用户名', width:120  @if(AppFunc::hasRule('auth.auth.set')) , event:'edit_uname' @endif }
+      ,{field:'display_name', title:'真实用户名' @if(AppFunc::hasRule('auth.auth.set')), event:'edit_name' @endif}
       ,{field:'role_name', title:'所属组'}
       ,{field:'created_at', title:'创建时间', }
       ,{field:'logined_at', title:'最近登录时间'}

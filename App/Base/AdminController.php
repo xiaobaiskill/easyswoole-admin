@@ -10,10 +10,17 @@ use App\Model\AdminLog as LogModel;
 use easySwoole\Cache\Cache;
 use App\Common\AppFunc;
 use App\Utility\Massage\Status;
+use EasySwoole\Template\Render;
 class AdminController extends BaseController
 {
 	protected $auth;   // 保存了登录用户的信息
 	protected $role_group;
+
+	public function render(string $template, array $data = [])
+    {
+    	$data = array_merge(['admin_role_id' => $this->auth['role_id']], $data);
+        $this->response()->write(Render::getInstance()->render($template, $data));
+    }
 
 	// 检查token 是否合法
 	private function checkToken()

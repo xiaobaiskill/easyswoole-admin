@@ -1,9 +1,9 @@
 <?php
 use App\Common\AppFunc;
+AppFunc::initRule($admin_role_id);
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title> hAdmin- 主页</title>

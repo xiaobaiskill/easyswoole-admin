@@ -1,19 +1,31 @@
-@extends('layouts.admin')
+<?php
+use App\Common\AppFunc;
+?>
 
+@extends('layouts.admin')
 
 @section('body')
 <div class="white p20">
     <table class="layui-hide" id="test" lay-filter="test"></table>
     <script type="text/html" id="toolbarDemo">
-        <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" lay-event="add">添加用户组</button>
-        </div>
+        @if(AppFunc::hasRule('auth.role.add'))
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm" lay-event="add">添加用户组</button>
+            </div>
+        @endif
     </script>
 
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editRule">变更权限</a>
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        @if(AppFunc::hasRule('auth.role.rule'))
+            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editRule">变更权限</a>
+        @endif
+        @if(AppFunc::hasRule('auth.role.set'))
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        @endif
+
+        @if(AppFunc::hasRule('auth.role.del'))
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        @endif
     </script>
 </div>
 @endsection
@@ -33,10 +45,10 @@
         ,title: '角色权限表'
         ,cols: [[
         {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-        ,{field:'name', title:'用户名', width:220, edit: 'text', event:'edit_name'}
-        ,{field:'detail', title:'描述', edit: 'text', event:'edit_detail'}
+        ,{field:'name', title:'用户名', width:220 @if(AppFunc::hasRule('auth.role.set')), edit: 'text' , event:'edit_name' @endif }
+        ,{field:'detail', title:'描述' @if(AppFunc::hasRule('auth.role.set')), edit: 'text' , event:'edit_detail' @endif}
         ,{field:'created_at', title:'创建时间'}
-        ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width: 180}
+        ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width: 200}
         ]]
         ,defaultToolbar:[]
         ,page: true

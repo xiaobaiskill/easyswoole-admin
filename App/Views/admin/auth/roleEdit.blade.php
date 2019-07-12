@@ -11,7 +11,6 @@ function callback(data){
         layer.msg('编辑成功',{time:1000},function(){
             location.href = '/role';
         });
-
     }
 }
 layui.use('form', function(){
