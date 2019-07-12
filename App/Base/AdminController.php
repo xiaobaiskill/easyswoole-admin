@@ -9,7 +9,7 @@ use App\Model\AdminLog as LogModel;
 
 use easySwoole\Cache\Cache;
 use App\Common\AppFunc;
-use App\Utility\Massage\Status;
+use App\Utility\Message\Status;
 use EasySwoole\Template\Render;
 class AdminController extends BaseController
 {

@@ -16,6 +16,7 @@ class Role extends AdminController
     private $rule_role_add  = 'auth.role.add';
     private $rule_role_set  = 'auth.role.set';
     private $rule_role_del  = 'auth.role.del';
+    private $rule_role_rule = 'auth.role.rule';
     public function index()
     {
         if(!$this->hasRuleForGet($this->rule_role_view)) return ;
@@ -169,7 +170,7 @@ class Role extends AdminController
 
     public function editRuleData()
     {
-        if(!$this->hasRuleForPost($this->rule_role_view)) return ;
+        if(!$this->hasRuleForPost($this->rule_role_rule)) return ;
 
         $info = $this->request()->getRequestParam('id', 'rules_checked', 'rules');
 
