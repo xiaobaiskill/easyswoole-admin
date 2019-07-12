@@ -1,5 +1,6 @@
 <?php
 use App\Common\AppFunc;
+AppFunc::initRule($admin_role_id);
 ?>
 
 @extends('layouts.admin')
