@@ -6,7 +6,7 @@ AppFunc::initRule($admin_role_id);
 <html>
 <head>
     <meta charset="utf-8">
-    <title> hAdmin- 主页</title>
+    <title> easyswoole-admin</title>
     <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
@@ -27,12 +27,12 @@ AppFunc::initRule($admin_role_id);
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
                                         <i class="fa fa-area-chart"></i>
-                                        <strong class="font-bold">hAdmin</strong>
+                                        <strong class="font-bold">后台管理</strong>
                                     </span>
                                 </span>
                             </a>
                         </div>
-                        <div class="logo-element">hAdmin
+                        <div class="logo-element"><i class="fa fa-area-chart"></i>
                         </div>
                     </li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
@@ -409,13 +409,18 @@ AppFunc::initRule($admin_role_id);
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i> </a>
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2" href="#" title="侧边伸缩"><i class="fa fa-dedent"></i> </a>
+
+                        <a class="refresh minimalize-styl-2" href="#"  title="刷新"><i class="fa fa-refresh"></i> </a>
+
                         <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                             <div class="form-group">
                                 <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
                             </div>
                         </form>
                     </div>
+
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">

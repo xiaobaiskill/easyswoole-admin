@@ -30,6 +30,12 @@ $(document).ready(function () {
         SmoothlyMenu();
     });
 
+    // 重新加载 页面
+    $('.refresh').click(function() {
+        obj = $('#J_iframe');
+        obj.attr('src', obj.attr('src'));
+    });
+
 
     // 侧边栏高度
     function fix_height() {
