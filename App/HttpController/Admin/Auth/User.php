@@ -121,6 +121,36 @@ class User extends AdminController
         return;
     }
 
+    // 修改密码
+    public function editPwd()
+    {
+        $this->render('admin.auth.userPwd');
+    }
+
+    public function editPwdData()
+    {
+        $info = $this->request()->getRequestParam('old_pwd','pwd');
+        if (AuthModel::getInstance()->pwdEncry($info['old_pwd'], $this->auth['encry']) == $this->auth['pwd']) {
+            if(AuthModel::getInstance()->save($this->auth['id'], ['pwd'=>$info['pwd']])) {
+                $this->writeJson(Status::CODE_OK, '修改成功');return ;
+            }
+        } 
+
+        $this->writeJson(Status::CODE_ERR, '修改失败');
+        Log::getInstance()->waring('user--editPwdData:' . json_encode($info, JSON_UNESCAPED_UNICODE) . '修改失败');
+    }
+
+    // 修改基本资料
+    public function info()
+    {
+        $this->render('admin.auth.userInfo');
+    }
+
+    public function infoData()
+    {
+        return ;
+    }
+
     // 单字段修改
     public function set()
     {

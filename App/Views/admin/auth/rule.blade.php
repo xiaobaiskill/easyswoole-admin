@@ -15,7 +15,7 @@
 
     <!-- 状态 -->
     <script type="text/html" id="switchStatus">
-        <input type="checkbox" name="status" value="@{{d.id}}" lay-skin="switch" @if(!$role_group->hasRule('auth.role.set')) disabled="off" @endif lay-text="启动|禁用" lay-filter="status" @{{ d.status == 1 ? 'checked' : '' }}>
+        <input type="checkbox" name="status" value="@{{d.id}}" lay-skin="switch" @if(!$role_group->hasRule('auth.rule.set')) disabled="off" @endif lay-text="启动|禁用" lay-filter="status" @{{ d.status == 1 ? 'checked' : '' }}>
     </script>
 
 

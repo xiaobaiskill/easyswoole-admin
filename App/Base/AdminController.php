@@ -33,7 +33,6 @@ class AdminController extends BaseController
 		$token = md5( $id . Config::getInstance()->getConf('app.token') . $time);
 		if($r->getCookieParams('token') == $token) {
 			$this->auth = AuthModel::getInstance()->find($id);
-			AppFunc::initRule($this->auth['role_id']);
 			// 如果 用户组类 被删除的话则使用,则使用 根用户组(RoleGroup)
 			try {
 				$role_group = 'RoleGroup' . $this->auth['role_id'];
@@ -41,7 +40,7 @@ class AdminController extends BaseController
 				$this->role_group = new $class($this->auth['role_id']);
 			} catch (Exception $e) {
 				// 如果没有存在的 组类 则又可能有问题
-            	Log::getInstance()->error("admin--checkToken:" . json_encode(['id'=>$id], JSON_UNESCAPED_UNICODE) . "检查到 对应组类不存在");
+            	Log::getInstance()->error("admin--checkToken:" . json_encode(['id'=>$id], JSON_UNESCAPED_UNICODE) . "检查到 对应角色组类不存在");
 			    $this->response()->redirect("/login");
 			}
 
@@ -89,7 +88,6 @@ class AdminController extends BaseController
 	public function onRequest(?string $action): ?bool
 	{
 		return $this->checkToken() && $this->Record();
-		// return true;
 	}
 
 	public function dataJson($data)

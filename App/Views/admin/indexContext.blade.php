@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('body')
-aaaaaa
+aaa
 @endsection

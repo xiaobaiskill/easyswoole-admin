@@ -160,7 +160,7 @@ class Role extends AdminController
     {
         if(!$this->hasRuleForGet($this->rule_role_view)) return ;
 
-        $rule_data = RuleModel::getInstance()->get(null, 'id, name as title, pid');
+        $rule_data = RuleModel::getInstance()->where('status',1)->get(null, 'id, name as title, pid');
         $data      = AppFunc::arrayToTree($rule_data);
 
         $id        = $this->request()->getRequestParam('id');

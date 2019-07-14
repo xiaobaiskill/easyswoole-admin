@@ -93,26 +93,4 @@ class AppFunc
         }
         return $str;
     }
-
-
-// ---------------- 关于权限 是否许可的 函数 ----------------
-    private static $rules = [];
-
-    // 只需执行一次即可。用于 初始化不同角色的所有权限
-    public static function initRule($role_id)
-    {
-        try{
-            self::$rules = Cache::get('role_' . $role_id);
-        }catch(Exception $e) {
-            return ;
-        }
-    }
-
-    public static function hasRule($rule) {
-        if(empty($rule)) {
-            return true;
-        }
-
-        return in_array($rule, self::$rules);
-    }
 }
