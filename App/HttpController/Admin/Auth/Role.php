@@ -160,7 +160,7 @@ class Role extends AdminController
     {
         if(!$this->hasRuleForGet($this->rule_role_view)) return ;
 
-        $rule_data = RuleModel::getInstance()->get(null, 'id, name as title, pid');
+        $rule_data = RuleModel::getInstance()->where('status',1)->get(null, 'id, name as title, pid');
         $data      = AppFunc::arrayToTree($rule_data);
 
         $id        = $this->request()->getRequestParam('id');
@@ -175,7 +175,7 @@ class Role extends AdminController
         $info = $this->request()->getRequestParam('id', 'rules_checked', 'rules');
 
         $id = $info['id'];
-        if (RoleModel::getInstance()->saveIdRules($id, $info['rules_checked'], $info['rules'])) {
+        if (RoleModel::getInstance()->saveIdRules($id, $info['rules_checked'] ? $info['rules_checked'] : [], $info['rules'] ? $info['rules'] : [])) {
             $this->writeJson(Status::CODE_OK);
         } else {
             $this->writeJson(Status::CODE_ERR, '删除失败');

@@ -11,6 +11,7 @@ use easySwoole\Cache\Cache;
 use App\Common\AppFunc;
 use App\Utility\Message\Status;
 use EasySwoole\Template\Render;
+use App\Utility\Log\Log;
 class AdminController extends BaseController
 {
 	protected $auth;   // 保存了登录用户的信息
@@ -18,7 +19,7 @@ class AdminController extends BaseController
 
 	public function render(string $template, array $data = [])
     {
-    	$data = array_merge(['admin_role_id' => $this->auth['role_id']], $data);
+    	$data = array_merge(['role_group' => $this->role_group], $data);
         $this->response()->write(Render::getInstance()->render($template, $data));
     }
 
@@ -32,14 +33,15 @@ class AdminController extends BaseController
 		$token = md5( $id . Config::getInstance()->getConf('app.token') . $time);
 		if($r->getCookieParams('token') == $token) {
 			$this->auth = AuthModel::getInstance()->find($id);
-			AppFunc::initRule($this->auth['role_id']);
 			// 如果 用户组类 被删除的话则使用,则使用 根用户组(RoleGroup)
 			try {
 				$role_group = 'RoleGroup' . $this->auth['role_id'];
 			    $class ="\\App\\Utility\\RoleGroup\\{$role_group}";
-				$this->role_group = new $class();
+				$this->role_group = new $class($this->auth['role_id']);
 			} catch (Exception $e) {
-			    $this->role_group = new \App\Utility\RoleGroup\RoleGroup();
+				// 如果没有存在的 组类 则又可能有问题
+            	Log::getInstance()->error("admin--checkToken:" . json_encode(['id'=>$id], JSON_UNESCAPED_UNICODE) . "检查到 对应角色组类不存在");
+			    $this->response()->redirect("/login");
 			}
 
 			return true;
@@ -64,7 +66,7 @@ class AdminController extends BaseController
 	// get 请求是否有权限访问
 	public function  hasRuleForGet($rule)
 	{
-		if(!AppFunc::hasRule($rule)) {
+		if(!$this->role_group->hasRule($rule)) {
 			$this->show404();
 			return false;
 		}
@@ -75,7 +77,7 @@ class AdminController extends BaseController
 	// post 请求是否有权限访问
 	public function  hasRuleForPost($rule)
 	{
-		if(!AppFunc::hasRule($rule)) {
+		if(!$this->role_group->hasRule($rule)) {
 			$this->writeJson(Status::CODE_RULE_ERR,'权限不足');
 			return false;
 		}
@@ -86,7 +88,6 @@ class AdminController extends BaseController
 	public function onRequest(?string $action): ?bool
 	{
 		return $this->checkToken() && $this->Record();
-		// return true;
 	}
 
 	public function dataJson($data)

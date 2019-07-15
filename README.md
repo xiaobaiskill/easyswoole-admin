@@ -16,7 +16,7 @@ App
           |- Idea.php           // 意见反馈类文件
           |- VeidyCode.php      // 验证码类
   |- Model
-      |-Idea.php                // idea model 类 继承了BaseModel
+      |-AdminAuth.php                // auth model 类 继承了BaseModel
   |- Process                  // 和进程有关的文件都存于此处
       |- HotReload.php          // 热更新 程序
   |- Static                   // 静态资源文件

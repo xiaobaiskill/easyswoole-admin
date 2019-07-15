@@ -47,6 +47,7 @@ class Login extends BaseController
             LoginLogModel::getInstance()->add($data['uname'], 1);
             AuthModel::getInstance()->setLoginedTime($id);
             if(!Cache::has('role_' . $bool['role_id'])) {
+                var_dump(Cache::get('role_' . $bool['role_id']));
                 RoleModel::getInstance()->cacheRules($bool['role_id']);
             }
         } else {

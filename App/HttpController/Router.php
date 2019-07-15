@@ -31,7 +31,7 @@ class Router extends AbstractRouter
             $route->get('/', '/Admin/Index');
             $route->get('/index_context', '/Admin/Index/indexContext');
             $route->get('/login', '/Admin/Login');
-            $route->post('/logout', '/Admin/Login/logout');
+            $route->get('/logout', '/Admin/Login/logout');
             $route->post('/login', '/Admin/Login/login');
             $route->get('/verify', '/Admin/Login/verify');
 
@@ -45,6 +45,12 @@ class Router extends AbstractRouter
 
                 $r->get('/edit/{id:\d+}', '/Admin/Auth/User/edit');
                 $r->post('/edit/{id:\d+}', '/Admin/Auth/User/editData');
+
+                $r->get('/pwd','/Admin/Auth/User/editPwd');
+                $r->post('/pwd','/Admin/Auth/User/editPwdData');
+
+                // $r->get('/info','/Admin/Auth/User/info');
+                // $r->post('/info','/Admin/Auth/User/infoData');
 
                 $r->post('/set/{id:\d+}', '/Admin/Auth/User/set');
                 $r->post('/del/{id:\d+}', '/Admin/Auth/User/del');

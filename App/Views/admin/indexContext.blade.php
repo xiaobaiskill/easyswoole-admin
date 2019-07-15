@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 
 @section('body')
-aaaaaa
+<div>
+	aaa
+
+</div>
 @endsection

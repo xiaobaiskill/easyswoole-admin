@@ -44,7 +44,7 @@ CREATE TABLE if not exists `admin_rule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='权限点和菜单列表';
 
 INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (1, '管理用户', 'auth', 1, 0);
-INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (2, '后台管理', 'auth.auth', 1, 1);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (2, '后台管理员', 'auth.auth', 1, 1);
 INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (3, '角色管理', 'auth.role', 1, 1);
 INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (4, '权限管理', 'auth.rule', 1, 1);
 INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (5, '查看管理列表', 'auth.auth.view', 1, 2);

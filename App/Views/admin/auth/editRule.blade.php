@@ -61,7 +61,8 @@ layui.use(['tree', 'util'], function(){
 
         let datajson = {'rules_checked':rules_checked, 'rules' : rules };
         post('/role/edit_rule/{{$id}}', datajson, callback)
-        arr = [];
+        rules_checked = [];
+        rules = [];
     }
   });
   var checked = @json($checked);

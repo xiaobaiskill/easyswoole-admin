@@ -28,7 +28,7 @@ class AdminRule extends BaseModel
         return $this->where('id', $id)->update($data);
     }
 
-    public function getIdsInNode($ids)
+    public function getIdsInNode($ids = [])
     {
         return $this->whereIn('id', $ids)->where('status', 1)->getColumn('node');
     }

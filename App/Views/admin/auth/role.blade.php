@@ -1,15 +1,10 @@
-<?php
-use App\Common\AppFunc;
-AppFunc::initRule($admin_role_id);
-?>
-
 @extends('layouts.admin')
 
 @section('body')
 <div class="white p20">
     <table class="layui-hide" id="test" lay-filter="test"></table>
     <script type="text/html" id="toolbarDemo">
-        @if(AppFunc::hasRule('auth.role.add'))
+        @if($role_group->hasRule('auth.role.add'))
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-sm" lay-event="add">添加用户组</button>
             </div>
@@ -17,14 +12,14 @@ AppFunc::initRule($admin_role_id);
     </script>
 
     <script type="text/html" id="barDemo">
-        @if(AppFunc::hasRule('auth.role.rule'))
+        @if($role_group->hasRule('auth.role.rule'))
             <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editRule">变更权限</a>
         @endif
-        @if(AppFunc::hasRule('auth.role.set'))
+        @if($role_group->hasRule('auth.role.set'))
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         @endif
 
-        @if(AppFunc::hasRule('auth.role.del'))
+        @if($role_group->hasRule('auth.role.del'))
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         @endif
     </script>
@@ -46,8 +41,8 @@ AppFunc::initRule($admin_role_id);
         ,title: '角色权限表'
         ,cols: [[
         {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-        ,{field:'name', title:'用户名', width:220 @if(AppFunc::hasRule('auth.role.set')), edit: 'text' , event:'edit_name' @endif }
-        ,{field:'detail', title:'描述' @if(AppFunc::hasRule('auth.role.set')), edit: 'text' , event:'edit_detail' @endif}
+        ,{field:'name', title:'用户名', width:220 @if($role_group->hasRule('auth.role.set')), edit: 'text' , event:'edit_name' @endif }
+        ,{field:'detail', title:'描述' @if($role_group->hasRule('auth.role.set')), edit: 'text' , event:'edit_detail' @endif}
         ,{field:'created_at', title:'创建时间'}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width: 200}
         ]]

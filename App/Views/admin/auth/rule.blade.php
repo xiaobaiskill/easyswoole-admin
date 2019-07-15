@@ -1,6 +1,3 @@
-<?php
-use App\Common\AppFunc;
-?>
 @extends('layouts.admin')
 
 @section('body')
@@ -9,7 +6,7 @@ use App\Common\AppFunc;
 
     <!-- 表头 -->
     <script type="text/html" id="toolbarDemo">
-        @if(AppFunc::hasRule('auth.role.add'))
+        @if($role_group->hasRule('auth.role.add'))
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-normal layui-btn-sm" lay-event="add">添加最高权限</button>
             </div>
@@ -18,21 +15,21 @@ use App\Common\AppFunc;
 
     <!-- 状态 -->
     <script type="text/html" id="switchStatus">
-        <input type="checkbox" name="status" value="@{{d.id}}" lay-skin="switch" @if(!AppFunc::hasRule('auth.role.set')) disabled="off" @endif lay-text="启动|禁用" lay-filter="status" @{{ d.status == 1 ? 'checked' : '' }}>
+        <input type="checkbox" name="status" value="@{{d.id}}" lay-skin="switch" @if(!$role_group->hasRule('auth.rule.set')) disabled="off" @endif lay-text="启动|禁用" lay-filter="status" @{{ d.status == 1 ? 'checked' : '' }}>
     </script>
 
 
     <!-- 操作 -->
     <script type="text/html" id="barDemo">
-        @if(AppFunc::hasRule('auth.rule.add'))
+        @if($role_group->hasRule('auth.rule.add'))
             <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add_rule">添加</a>
         @endif
 
-        @if(AppFunc::hasRule('auth.rule.set'))
+        @if($role_group->hasRule('auth.rule.set'))
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         @endif
 
-        @if(AppFunc::hasRule('auth.rule.del'))
+        @if($role_group->hasRule('auth.rule.del'))
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         @endif
     </script>
@@ -54,7 +51,7 @@ use App\Common\AppFunc;
         ,cols: [[
         {field:'id', title:'ID', width:80, fixed: 'left'}
         ,{field:'name', title:'用户名', width:220}
-        ,{field:'node', title:'节点标记', width:220 @if(AppFunc::hasRule('auth.rule.set')), event:'edit_node' @endif}
+        ,{field:'node', title:'节点标记', width:220 @if($role_group->hasRule('auth.rule.set')), event:'edit_node' @endif}
         ,{field:'created_at', title:'创建时间'}
         ,{field:'status', title:'是否启用', templet: '#switchStatus', width:100}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width: 180}

@@ -38,10 +38,9 @@ class AdminAuth extends BaseModel
     {
         $data  = $this->findUname($uname);
         return $this->pwdEncry($pwd, $data['encry']) == $data['pwd'] ? $data : false;
-        return md5($data['encry'] . $pwd . $encry) == $data['pwd'] ? $data : false;
     }
 
-    private function pwdEncry($pwd, $rand)
+    public function pwdEncry($pwd, $rand)
     {
         $encry = Config::getInstance()->getConf('app.verify');
         return md5($rand . $pwd . $encry);

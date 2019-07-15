@@ -1,7 +1,3 @@
-<?php
-use App\Common\AppFunc;
-AppFunc::initRule($admin_role_id);
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -335,50 +331,50 @@ AppFunc::initRule($admin_role_id);
                     </li>
 
 					<!-- 用户管理 -->
-                    @if(AppFunc::hasRule('auth'))
+                    @if($role_group->hasRule('auth'))
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">管理用户</span>
                     </li>
-                        @if(AppFunc::hasRule('auth.auth'))
+                        @if($role_group->hasRule('auth.auth'))
                             <li>
                                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">后台管理员</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    @if(AppFunc::hasRule('auth.auth.view'))
+                                    @if($role_group->hasRule('auth.auth.view'))
                                         <li><a class="J_menuItem" href="/auth">管理员列表</a>
                                         </li>
                                     @endif
-                                    @if(AppFunc::hasRule('auth.auth.add'))
+                                    @if($role_group->hasRule('auth.auth.add'))
                                         <li><a class="J_menuItem" href="/auth/add">添加管理员</a>
                                         </li>
                                     @endif
                                 </ul>
                             </li>
                         @endif
-                        @if(AppFunc::hasRule('auth.role'))
+                        @if($role_group->hasRule('auth.role'))
                             <li>
                                 <a href="#"><i class="fa fa-users"></i> <span class="nav-label">角色管理</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    @if(AppFunc::hasRule('auth.role.view'))
+                                    @if($role_group->hasRule('auth.role.view'))
                                         <li><a class="J_menuItem"  href="/role">角色列表</a>
                                         </li>
                                     @endif
-                                    @if(AppFunc::hasRule('auth.role.add'))
+                                    @if($role_group->hasRule('auth.role.add'))
                                         <li><a class="J_menuItem" href="/role/add">添加角色</a>
                                         </li>
                                     @endif
                                 </ul>
                             </li>
                         @endif
-                        @if(AppFunc::hasRule('auth.rule'))
+                        @if($role_group->hasRule('auth.rule'))
                             <li>
                                 <a href="#"><i class="fa fa-key fa-fw"></i> <span class="nav-label">权限管理</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    @if(AppFunc::hasRule('auth.rule.view'))
+                                    @if($role_group->hasRule('auth.rule.view'))
                                         <li><a class="J_menuItem" href="/rule">权限列表</a>
                                         </li>
                                     @endif
-                                    @if(AppFunc::hasRule('auth.rule.add'))
+                                    @if($role_group->hasRule('auth.rule.add'))
                                         <li><a class="J_menuItem" href="/rule/add">添加权限</a>
                                         </li>
                                     @endif
@@ -412,86 +408,43 @@ AppFunc::initRule($admin_role_id);
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2" href="#" title="侧边伸缩"><i class="fa fa-dedent"></i> </a>
 
+                        <a class="navbar-minimalize minimalize-styl-2" href="http://www.xiaobaiskill.cn" title="前台">
+                        <img src="/img/web.png" alt=""> </a>
+
                         <a class="refresh minimalize-styl-2" href="#"  title="刷新"><i class="fa fa-refresh"></i> </a>
 
-                        <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                        <!-- <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                             <div class="form-group">
                                 <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
                             </div>
-                        </form>
+                        </form> -->
                     </div>
 
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
+                                {{$uname}}<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-messages">
-                                <li class="m-t-xs">
-                                    <div class="dropdown-messages-box">
-                                        <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="/img/a7.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <small class="pull-right">46小时前</small>
-                                            <strong>小四</strong> 是不是只有我死了,你们才不骂爵迹
-                                            <br>
-                                            <small class="text-muted">3天前 2014.11.8</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="dropdown-messages-box">
-                                        <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="/img/a4.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right text-navy">25小时前</small>
-                                            <strong>二愣子</strong> 呵呵
-                                            <br>
-                                            <small class="text-muted">昨天</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="text-center link-block">
-                                        <a class="J_menuItem" href="mailbox.html">
-                                            <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li>
-                                    <a href="mailbox.html">
-                                        <div>
-                                            <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
-                                            <span class="pull-right text-muted small">4分钟前</span>
+                                <li class="m-t-xs text-center">
+                                    <a class="J_menuItem" href="/auth/info">
+                                        <div class="dropdown-messages-box">
+                                            基本资料
                                         </div>
                                     </a>
                                 </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="profile.html">
-                                        <div>
-                                            <i class="fa fa-qq fa-fw"></i> 3条新回复
-                                            <span class="pull-right text-muted small">12分钟钱</span>
+                                <li class="text-center">
+                                    <a class="J_menuItem" href="/auth/pwd">
+                                        <div class="dropdown-messages-box">
+                                                修改密码
                                         </div>
                                     </a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
                                     <div class="text-center link-block">
-                                        <a class="J_menuItem" href="notifications.html">
-                                            <strong>查看所有 </strong>
-                                            <i class="fa fa-angle-right"></i>
+                                        <a href="/logout">
+                                            <strong> 退出</strong>
                                         </a>
                                     </div>
                                 </li>
