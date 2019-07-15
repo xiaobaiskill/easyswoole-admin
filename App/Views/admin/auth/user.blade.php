@@ -6,7 +6,6 @@
             margin:10px;
         }
     </style>
-
 @endsection
 
 @section('body')

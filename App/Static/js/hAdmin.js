@@ -111,3 +111,7 @@ function SmoothlyMenu() {
         $('#side-menu').removeAttr('style');
     }
 }
+
+function Jump(url) {
+    $('#J_iframe').attr('src', url);
+}

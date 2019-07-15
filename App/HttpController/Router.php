@@ -34,6 +34,8 @@ class Router extends AbstractRouter
             $route->get('/logout', '/Admin/Login/logout');
             $route->post('/login', '/Admin/Login/login');
             $route->get('/verify', '/Admin/Login/verify');
+            $route->post('/login_log', '/Admin/Index/loginLog');
+            $route->get('/version', '/Admin/Index/version');
 
             // 管理员
             $route->addGroup('/auth', function (RouteCollector $r) {

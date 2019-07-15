@@ -4,6 +4,7 @@ namespace App\HttpController\Admin;
 
 use App\Base\AdminController;
 use App\Model\AdminLoginLog as LoginLog;
+use App\Utility\Message\Status;
 
 class Index extends AdminController
 {
@@ -14,9 +15,10 @@ class Index extends AdminController
 
     public function indexContext()
     {
-        $this->render('admin.indexContext');
+        $this->render('admin.index.indexContext');
     }
 
+    // 登录日志信息
     public function loginLog()
     {
  		$data = $this->getPage();
@@ -28,5 +30,11 @@ class Index extends AdminController
         $data       = ['code' => Status::CODE_OK, 'count' => $role_count, 'data' => $role_data];
         $this->dataJson($data);
         return;
+    }
+
+    // 日志
+    public function version()
+    {
+        $this->render('admin.version');
     }
 }

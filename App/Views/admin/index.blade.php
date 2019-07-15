@@ -35,7 +35,7 @@
                         <span class="ng-scope">分类</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="index_v1.html">
+                        <a class="J_menuItem" href="/index_context">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">主页</span>
                         </a>
@@ -408,7 +408,7 @@
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2" href="#" title="侧边伸缩"><i class="fa fa-dedent"></i> </a>
 
-                        <a class="navbar-minimalize minimalize-styl-2" href="http://www.xiaobaiskill.cn" title="前台">
+                        <a class="minimalize-styl-2" href="http://www.xiaobaiskill.cn" title="前台">
                         <img src="/img/web.png" alt=""> </a>
 
                         <a class="refresh minimalize-styl-2" href="#"  title="刷新"><i class="fa fa-refresh"></i> </a>
