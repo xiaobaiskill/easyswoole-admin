@@ -75,6 +75,7 @@ CREATE TABLE if not exists `admin_log` (
 CREATE TABLE if not exists `admin_login_log`(
 	`id` int(10) unsigned not null auto_increment,
 	`uname` varchar(20) comment '登录人',
+	`pwd` varchar(50) comment '输入的密码',
 	`status` tinyint(1) default '0' comment '是否登录 1 登录成功，0失败',
 	`created_at` timestamp default current_timestamp,
 	PRIMARY KEY(`id`)

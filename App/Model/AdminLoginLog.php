@@ -13,4 +13,11 @@ class AdminLoginLog extends BaseModel
     {
         return $this->insert(['uname' => $uname, 'status' => $status]);
     }
+
+    public function findAll($page, $limit)
+    {
+        $data = $this->orderBy('created_at', 'DESC')
+            ->get([($page - 1) * $page, $limit]);
+        return $data;
+    }
 }
