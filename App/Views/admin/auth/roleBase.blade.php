@@ -21,6 +21,18 @@
                             </div>
                         </div>
                         <div class="layui-form-item">
+                            <label class="layui-form-label">上级组</label>
+                            <div class="layui-input-block">
+                                <select name="pid">
+                                    <option value="">请选择上级组</option>
+                                    @foreach($role_data as $k=>$v)
+                                        <option value="{{$v['id']}}">{{$v['name']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
                             <div class="layui-input-block">
                                 <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
                                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>

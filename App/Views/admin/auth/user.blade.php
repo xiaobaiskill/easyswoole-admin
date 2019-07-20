@@ -94,59 +94,64 @@ layui.use('table', function(){
     table.on('tool(test)', function(obj){
         var data = obj.data;
         event = obj.event;
-        if(event === 'del'){
-            layer.confirm('真的删除行么', function(index){
-                $.post('/auth/del/' + data.id ,'',function(data){
+
+        switch(obj.event){
+            case 'del':
+                layer.confirm('真的删除行么', function(index){
+                    $.post('/auth/del/' + data.id ,'',function(data){
+                        layer.close(index);
+                        if(data.code != 0) {
+                            layer.msg(data.msg);
+                        } else {
+                            obj.del();
+                        }
+                    });
+                });
+            break;
+            case 'edit':
+                layer.open({
+                     title: '编辑权限'
+                    ,type: 2
+                    ,content: '/auth/edit/' + data.id
+                    ,area:['550px', '470px']
+                });
+            break;
+            case 'edit_uname':
+                layer.prompt({
+                    formType: 2
+                    ,value: data.uname
+                }, function(value, index){
                     layer.close(index);
-                    if(data.code != 0) {
-                        layer.msg(data.msg);
-                    } else {
-                        obj.del();
-                    }
+                    let datajson = {key:'uname', value:value};
+                    $.post('/auth/set/' + data.id ,datajson,function(data){
+                        if(data.code != 0) {
+                            layer.msg(data.msg);
+                        } else {
+                            obj.update({
+                              uname: value
+                            });
+                        }
+                    });
                 });
-            });
-        } else if(event === 'edit'){
-            // location.href = '/auth/edit/' + data.id;
-            layer.open({
-                 title: '编辑权限'
-                ,type: 2
-                ,content: '/auth/edit/' + data.id
-                ,area:['550px', '470px']
-            });
-        } else if(event = 'edit_uname'){
-            layer.prompt({
-                formType: 2
-                ,value: data.uname
-            }, function(value, index){
-                layer.close(index);
-                let datajson = {key:'uname', value:value};
-                $.post('/auth/set/' + data.id ,datajson,function(data){
-                    if(data.code != 0) {
-                        layer.msg(data.msg);
-                    } else {
-                        obj.update({
-                          uname: value
-                        });
-                    }
+            break;
+            case 'edit_name':
+                layer.prompt({
+                    formType: 2
+                    ,value: data.display_name
+                }, function(value, index){
+                    layer.close(index);
+                    let datajson = {key:'display_name', value:value};
+                    $.post('/auth/set/' + data.id ,datajson,function(data){
+                        if(data.code != 0) {
+                            layer.msg(data.msg);
+                        } else {
+                            obj.update({
+                              display_name: value
+                            });
+                        }
+                    });
                 });
-            });
-        } else if(event = 'edit_name') {
-            layer.prompt({
-                formType: 2
-                ,value: data.display_name
-            }, function(value, index){
-                layer.close(index);
-                let datajson = {key:'display_name', value:value};
-                $.post('/auth/set/' + data.id ,datajson,function(data){
-                    if(data.code != 0) {
-                        layer.msg(data.msg);
-                    } else {
-                        obj.update({
-                          display_name: value
-                        });
-                    }
-                });
-            });
+            break;
         }
     });
 

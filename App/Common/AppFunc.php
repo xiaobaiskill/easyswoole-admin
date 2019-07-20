@@ -43,15 +43,16 @@ class AppFunc
      * / 规则 |--- 就分的
      * @param  [type] $tree_list [树 数组]
      * @param  [type] &$tree     [返回的二维数组]
+     * @param  [type] $name      [那个字段进行 拼接|-- ]
      * @param  string $pre       [前缀]
      * @param  string $child     [树 的子分支]
      * @return [type]            [description]
      */
-    public static function treeRule($tree_list, &$tree, $pre = '', $child = 'children')
+    public static function treeRule($tree_list, &$tree, $pre = '', $name = 'name', $child = 'children')
     {
         if (is_array($tree_list)) {
             foreach ($tree_list as $k => $v) {
-                $v['name'] = $pre . $v['name'];
+                $v[$name] = $pre . $v[$name];
                 $tree[]    = $v;
                 if (isset($v[$child])) {
                     self::treeRule($v[$child], $tree, $pre . '&nbsp;|------&nbsp;');

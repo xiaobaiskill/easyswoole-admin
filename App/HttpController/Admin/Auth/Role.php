@@ -42,11 +42,12 @@ class Role extends AdminController
     private function fieldInfo()
     {
         $request = $this->request();
-        $data    = $request->getRequestParam('name', 'detail');
+        $data    = $request->getRequestParam('name', 'detail','pid');
 
         $validate = new \EasySwoole\Validate\Validate();
         $validate->addColumn('name')->required();
         $validate->addColumn('detail')->required();
+        $validate->addColumn('pid')->required();
 
         if (!$validate->validate($data)) {
             $this->writeJson(Status::CODE_ERR, '请勿乱操作');
@@ -59,8 +60,8 @@ class Role extends AdminController
     public function add()
     {
         if(!$this->hasRuleForGet($this->rule_role_add)) return ;
-
-        $this->render('admin.auth.roleAdd');
+        $role_data = RoleModel::getInstance()->get(null, 'id,name');
+        $this->render('admin.auth.roleAdd',['role_data'=>$role_data]);
     }
 
     public function addData()
@@ -86,8 +87,10 @@ class Role extends AdminController
 
         $id = $this->request()->getRequestParam('id');
 
-        $info = RoleModel::getInstance()->find($id, 'name, detail');
-        $this->render('admin.auth.roleEdit', ['id' => $id, 'info' => $info]);
+        $info = RoleModel::getInstance()->find($id, 'name, detail, pid');
+        $role_data = RoleModel::getInstance()->where('id', $id, '<>')->get(null, 'id,name');
+
+        $this->render('admin.auth.roleEdit', ['id' => $id, 'info' => $info, 'role_data'=>$role_data]);
     }
 
     public function editData()

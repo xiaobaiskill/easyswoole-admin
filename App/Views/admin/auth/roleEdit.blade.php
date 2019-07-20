@@ -18,6 +18,7 @@ layui.use('form', function(){
     form.val("form", {
       "name": "{{ $info['name'] }}"
       ,"detail": "{{ $info['detail'] }}"
+      ,"pid": "{{ $info['pid'] }}"
     });
 
   //监听提交

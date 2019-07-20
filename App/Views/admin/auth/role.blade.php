@@ -6,14 +6,14 @@
     <script type="text/html" id="toolbarDemo">
         @if($role_group->hasRule('auth.role.add'))
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm" lay-event="add">添加用户组</button>
+                <button class="layui-btn layui-btn-normal layui-btn-sm" lay-event="add">添加用户组</button>
             </div>
         @endif
     </script>
 
     <script type="text/html" id="barDemo">
         @if($role_group->hasRule('auth.role.rule'))
-            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="editRule">变更权限</a>
+            <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="editRule">变更权限</a>
         @endif
         @if($role_group->hasRule('auth.role.set'))
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -44,7 +44,7 @@
         ,{field:'name', title:'用户名', width:220 @if($role_group->hasRule('auth.role.set')), edit: 'text' , event:'edit_name' @endif }
         ,{field:'detail', title:'描述' @if($role_group->hasRule('auth.role.set')), edit: 'text' , event:'edit_detail' @endif}
         ,{field:'created_at', title:'创建时间'}
-        ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width: 200}
+        ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width: 250}
         ]]
         ,defaultToolbar:[]
         ,page: true
@@ -120,7 +120,7 @@
                      title: '编辑用户组'
                     ,type: 2
                     ,content: '/role/edit/' + data.id
-                    ,area:['500px', '250px']
+                    ,area:['500px', '350px']
                 });
             break;
             case 'editRule':
