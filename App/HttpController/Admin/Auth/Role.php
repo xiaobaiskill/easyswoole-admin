@@ -33,8 +33,12 @@ class Role extends AdminController
         $role_data = RoleModel::getInstance()
             ->findAll($data['page'], $data['limit']);
 
+        $tree_data = AppFunc::arrayToTree($role_data, 'pid');
+        $data      = [];
+        AppFunc::treeRule($tree_data, $data);
+
         $role_count = RoleModel::getInstance()->count();
-        $data       = ['code' => Status::CODE_OK, 'count' => $role_count, 'data' => $role_data];
+        $data       = ['code' => Status::CODE_OK, 'data' => $data];
         $this->dataJson($data);
         return;
     }

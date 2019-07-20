@@ -50,7 +50,7 @@
         ,title: '权限'
         ,cols: [[
         {field:'id', title:'ID', width:80, fixed: 'left'}
-        ,{field:'name', title:'用户名', width:220}
+        ,{field:'name', title:'权限名', width:220}
         ,{field:'node', title:'节点标记', width:220 @if($role_group->hasRule('auth.rule.set')), event:'edit_node' @endif}
         ,{field:'created_at', title:'创建时间'}
         ,{field:'status', title:'是否启用', templet: '#switchStatus', width:100}

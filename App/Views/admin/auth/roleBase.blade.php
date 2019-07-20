@@ -17,7 +17,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">描述</label>
                             <div class="layui-input-block">
-                                <input type="text" name="detail" required lay-verify="required" placeholder="请输入节点标识" autocomplete="off" class="layui-input">
+                                <input type="text" name="detail" required lay-verify="required" placeholder="请输入组的描述" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">

@@ -17,7 +17,7 @@ class AdminRole extends BaseModel
     {
         return $this->orderBy('created_at', 'ASC')
             ->get([($page - 1) * $page, $limit]
-                , "id, name, detail, created_at");
+                , "id, name, detail, created_at, pid");
     }
 
     public function add($data) 

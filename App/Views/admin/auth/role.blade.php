@@ -41,13 +41,12 @@
         ,title: '角色权限表'
         ,cols: [[
         {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-        ,{field:'name', title:'用户名', width:220 @if($role_group->hasRule('auth.role.set')), edit: 'text' , event:'edit_name' @endif }
+        ,{field:'name', title:'用户组', width:220}
         ,{field:'detail', title:'描述' @if($role_group->hasRule('auth.role.set')), edit: 'text' , event:'edit_detail' @endif}
         ,{field:'created_at', title:'创建时间'}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width: 250}
         ]]
         ,defaultToolbar:[]
-        ,page: true
     });
     window.refresh = function()
     {
@@ -67,24 +66,24 @@
     table.on('tool(test)', function(obj){
         var data = obj.data;
         switch(obj.event){
-            case 'edit_name':
-                layer.prompt({
-                    formType: 2
-                    ,value: data.name
-                }, function(value, index){
-                    layer.close(index);
-                    let datajson = {key:'name', value:value};
-                    $.post('/role/set/' + data.id ,datajson,function(data){
-                        if(data.code != 0) {
-                            layer.msg(data.msg);
-                        } else {
-                            obj.update({
-                              name: value
-                            });
-                        }
-                    });
-                });
-            break;
+            // case 'edit_name':
+            //     layer.prompt({
+            //         formType: 2
+            //         ,value: data.name
+            //     }, function(value, index){
+            //         layer.close(index);
+            //         let datajson = {key:'name', value:value};
+            //         $.post('/role/set/' + data.id ,datajson,function(data){
+            //             if(data.code != 0) {
+            //                 layer.msg(data.msg);
+            //             } else {
+            //                 obj.update({
+            //                   name: value
+            //                 });
+            //             }
+            //         });
+            //     });
+            // break;
             case 'edit_detail':
                 layer.prompt({
                     formType: 2
