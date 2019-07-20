@@ -1,6 +1,5 @@
 @extends('admin.auth.userBase')
 
-@section('body-title','添加用户')
 
 @section('javascriptFooter')
 <script>
@@ -19,7 +18,9 @@ layui.use('form', function(){
 	        layer.msg(data.msg);
 	    } else {
 	        layer.msg('修改成功',{time:1000},function(){
-	            location.href = '/auth';
+	            parent.layer.close(parent.layer.getFrameIndex(window.name));
+		        parent.refresh();
+
 	        });
 
 	    }

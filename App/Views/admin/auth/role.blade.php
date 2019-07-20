@@ -33,7 +33,7 @@
     layui.use('table', function(){
     var table = layui.table;
 
-    table.render({
+    var datatable = table.render({
         elem: '#test'
         ,'url' :'/role/get_all'
         ,method:'post'
@@ -49,6 +49,10 @@
         ,defaultToolbar:[]
         ,page: true
     });
+    window.refresh = function()
+    {
+        datatable.reload();
+    }
 
     //头工具栏事件
     table.on('toolbar(test)', function(obj){
@@ -112,7 +116,12 @@
                 });
             break;
             case 'edit':
-                location.href = '/role/edit/' + data.id;
+                layer.open({
+                     title: '编辑用户组'
+                    ,type: 2
+                    ,content: '/role/edit/' + data.id
+                    ,area:['500px', '250px']
+                });
             break;
             case 'editRule':
                 layer.open({

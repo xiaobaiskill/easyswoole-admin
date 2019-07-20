@@ -2,7 +2,7 @@
 
 @section('body')
 <div class="layui-card">
-    <div class="layui-card-header">@yield('body-title')</div>
+    @yield('body-title')
     <div class="layui-card-body">
         <div class="layui-container">
             <div class="layui-row">

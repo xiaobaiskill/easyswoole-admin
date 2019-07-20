@@ -1,7 +1,8 @@
 @extends('admin.auth.userBase')
 
-@section('body-title','添加用户')
-
+@section('body-title')
+    <div class="layui-card-header">添加用户</div>
+@endsection
 @section('javascriptFooter')
 <script>
 layui.use('form', function(){

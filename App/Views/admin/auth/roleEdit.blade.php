@@ -1,7 +1,5 @@
 @extends('admin.auth.roleBase')
 
-@section('body-title','编辑用户组')
-
 @section('javascriptFooter')
 <script>
 function callback(data){
@@ -9,7 +7,8 @@ function callback(data){
         layer.msg(info.msg);
     } else {
         layer.msg('编辑成功',{time:1000},function(){
-            location.href = '/role';
+            parent.layer.close(parent.layer.getFrameIndex(window.name));
+            parent.refresh();
         });
     }
 }

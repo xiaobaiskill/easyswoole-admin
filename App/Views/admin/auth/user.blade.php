@@ -44,7 +44,7 @@
 layui.use('table', function(){
   var table = layui.table, form = layui.form;
 
-  table.render({
+  var datatable = table.render({
     elem: '#test'
     ,url:'/auth/get_all'
     ,method:'post'
@@ -63,6 +63,11 @@ layui.use('table', function(){
     ]]
     ,defaultToolbar:[]
   });
+
+    window.refresh = function()
+    {
+        datatable.reload();
+    }
 
     //头工具栏事件
     table.on('toolbar(test)', function(obj){
@@ -101,7 +106,13 @@ layui.use('table', function(){
                 });
             });
         } else if(event === 'edit'){
-            location.href = '/auth/edit/' + data.id;
+            // location.href = '/auth/edit/' + data.id;
+            layer.open({
+                 title: '编辑权限'
+                ,type: 2
+                ,content: '/auth/edit/' + data.id
+                ,area:['550px', '470px']
+            });
         } else if(event = 'edit_uname'){
             layer.prompt({
                 formType: 2

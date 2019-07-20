@@ -49,7 +49,7 @@ EOF;
     public function saveIdRules($id, $rules_checked, $rules)
     {
         if ($this->saveIdData($id, ['rules_checked' => implode(',', $rules_checked), 'rules' => implode(',', $rules)])) {
-            $this->cacheRules($id);
+            // $this->cacheRules($id);
             return true;
         } else {
             return false;
@@ -60,7 +60,7 @@ EOF;
     {
         if($this->delId($id, true)) {
             @unlink($this->role_group_dir . 'RoleGroup' . $id . '.php');
-            Cache::delete('role_' . $id);
+            // Cache::delete('role_' . $id);
             return true;
         }
 

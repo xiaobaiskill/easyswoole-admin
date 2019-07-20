@@ -20,8 +20,10 @@ layui.use('form', function(){
 		    if(info.code != 0) {
 				layer.msg(info.msg);
 			} else {
-				layer.msg('编辑成功');
-				location.href = '/rule';
+				layer.msg('编辑成功',{time:1000},function(){
+		            parent.layer.close(parent.layer.getFrameIndex(window.name));
+		            parent.refresh();
+		        });
 			}
 		});
 		return false;

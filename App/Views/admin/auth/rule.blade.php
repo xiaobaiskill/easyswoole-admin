@@ -42,7 +42,7 @@
     layui.use('table', function(){
     var table = layui.table, form = layui.form;
 
-    table.render({
+    var datatable = table.render({
         elem: '#test'
         ,url:'/rule/get_all'
         ,method:'post'
@@ -59,6 +59,11 @@
         ,defaultToolbar:[]
         // ,page: true
     });
+
+    window.refresh = function()
+    {
+        datatable.reload();
+    }
 
     //头工具栏事件
     table.on('toolbar(test)', function(obj){
@@ -104,7 +109,12 @@
                 });
             break;
             case 'edit':
-                location.href = '/rule/edit/' + data.id;
+                layer.open({
+                     title: '编辑权限'
+                    ,type: 2
+                    ,content: '/rule/edit/' + data.id
+                    ,area:['500px', '270px']
+                });
             break;
             case 'edit_node':
                 layer.prompt({

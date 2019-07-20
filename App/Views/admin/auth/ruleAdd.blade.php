@@ -1,7 +1,8 @@
 @extends('admin.auth.ruleBase')
 
-@section('body-title','添加权限')
-
+@section('body-title')
+  <div class="layui-card-header">添加权限</div>
+@endsection
 @section('javascriptFooter')
 <script>
 

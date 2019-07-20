@@ -24,6 +24,7 @@ create table if not exists `admin_role` (
 	`detail` varchar(200) not null comment '简单描述',
 	`rules_checked` text  comment 'layui 树形选中的checked',
 	`rules` text  comment '权限列表 所有打勾的',
+	`pid` int(10) unsigned default 0 comment '上级部门';
 	`created_at` timestamp null default current_timestamp,
 	PRIMARY key(`id`)
 ) engine =InnoDB default charset=utf8mb4 comment= '组名';
