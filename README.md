@@ -1,7 +1,33 @@
 基于 easyswoole 二次开发
 ====
 
-#### 一、目录介绍
+#### 一、后台展示
+* 1.1 主页
+![主页](show/主页.png)
+
+* 1.2 管理员列表页面
+![管理员列表](show/管理员列表.png)
+
+* 1.3 添加管理员
+![添加管理员](show/添加管理员.png)
+
+* 1.4 角色管理页面
+![角色管理](show/角色管理.png)
+
+* 1.5 添加用户组
+![添加用户组](show/添加用户组.png)
+
+* 1.6 变更权限
+![变更权限](show/变更权限.png)
+
+* 1.7 权限管理
+![权限管理](show/权限管理.png)
+
+* 1.8 添加权限
+![添加权限](show/添加权限.png)
+
+
+#### 二、目录介绍
 ```
 App
   |- Base                     // 基础类文件
@@ -29,7 +55,7 @@ App
 ```
 
 
-#### 二、环境
+#### 三、环境
 ```
 php >= 7.1 
 swoole-4.3 
@@ -37,7 +63,7 @@ swoole-4.3
 ```
 
 
-#### 三、安装
+#### 四、安装
 ```
 * composer config -g repo.packagist composer https://packagist.laravel-china.org
 
@@ -55,8 +81,8 @@ swoole-4.3
 ```
 
 
-#### 四、设置
-* 4.1 nginx 配置
+#### 五、设置
+* 5.1 nginx 配置
 ```
 location / {
       rewrite ^/(.*)$ /admin/$1 break;
@@ -78,7 +104,7 @@ location ~ .*\.(js|css|map)?$
 }
 
 ```
-* 4.2 db 配置文件
+* 5.2 db 配置文件
 ```
 在App/Config 目录下添加文件 Database.php
 
@@ -105,7 +131,7 @@ return [
 ?>
 ```
 
-#### 五、启动
+#### 六、启动
 ```
 // 测试环境启动
 * php easyswoole start d   // 守护模式启动   默认加载 dev.php 文件
@@ -115,7 +141,7 @@ return [
 php easyswoole start  produce d   // 加载produce.php 文件
 ```
 
-#### 六、规范
+#### 七、规范
 
 * 类名
 `大驼峰 （如： IndexController  BaseModel）`
@@ -125,32 +151,6 @@ php easyswoole start  produce d   // 加载produce.php 文件
 
 * 变量
 `下划线 (如： $pwd_hash $user_info)`
-
-
-#### 七、后台展示
-* 7.1 主页
-![主页](show/主页.png)
-
-* 7.2 管理员列表页面
-![管理员列表](show/管理员列表.png)
-
-* 7.3 添加管理员
-![添加管理员](show/添加管理员.png)
-
-* 7.4 角色管理页面
-![角色管理](show/角色管理.png)
-
-* 7.5 添加用户组
-![添加用户组](show/添加用户组.png)
-
-* 7.6 变更权限
-![变更权限](show/变更权限.png)
-
-* 7.7 权限管理
-![权限管理](show/权限管理.png)
-
-* 7.8 添加权限
-![添加权限](show/添加权限.png)
 
 #### 八、其他
 ```
