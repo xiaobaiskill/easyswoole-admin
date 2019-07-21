@@ -14,7 +14,9 @@ create table if not exists `admin_auth` (
 	UNIQUE KEY(`uname`)
 ) engine=InnoDB default CHARSET=utf8mb4 COMMENT='后台管理员';
 
-INSERT INTO `admin_auth`(`id`, `uname`, `pwd`, `encry`, `role_id`, `display_name`, `status`, `deleted`) VALUES (1, 'admin', '617d19b72e725a05addf91d5430d240f', 'XK.?}<', 1, 'jmz', 1, 0);
+INSERT INTO `admin_auth`(`id`, `uname`, `pwd`, `encry`, `role_id`, `display_name`, `status`, `deleted`) VALUES 
+(1, 'admin', '617d19b72e725a05addf91d5430d240f', 'XK.?}<', 1, 'jmz', 1, 0)
+,(2	'jmz',	'76f754fabe97d1e1e451fe531df5160b', 'M@q}DS', 2, 'caiwu 123', 1, 0);
 
 
 # 组
@@ -29,7 +31,9 @@ create table if not exists `admin_role` (
 	PRIMARY key(`id`)
 ) engine =InnoDB default charset=utf8mb4 comment= '组名';
 
-INSERT INTO `admin_role`(`id`, `name`, `detail`, `rules_checked`, `rules`) VALUES (1, '超级管理员', '网站建设者', '5,6,7,8,9,10,11,12,17,13,14,15,16', '1,2,5,6,7,8,3,9,10,11,12,17,4,13,14,15,16');
+INSERT INTO `admin_role`(`id`, `name`, `detail`, `rules_checked`, `rules`) VALUES 
+(1, '超级管理员', '网站建设者', '5,6,7,8,9,10,11,12,17,13,14,15,16', '1,2,5,6,7,8,3,9,10,11,12,17,4,13,14,15,16','0')
+,(2,'测试	测试小角色','5,6,7,8,9,10,11,12,17,13,14,15,16,19','1,2,5,6,7,8,3,9,10,11,12,17,4,13,14,15,16,18,19','0');
 
 # 权限
 CREATE TABLE if not exists `admin_rule` (
@@ -64,7 +68,7 @@ INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (17, '变
 INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (18, '主页', 'index', 1, 0);
 INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (19, '登录日志', 'index.login.log', 1, 18);
 
-
+# 操作日志记录
 CREATE TABLE if not exists `admin_log` (
 	`id` int(10) unsigned not null auto_increment,
 	`url` varchar(50) not null DEFAULT '' comment '操作url',
@@ -74,7 +78,7 @@ CREATE TABLE if not exists `admin_log` (
 	PRIMARY KEY(`id`)
 ) engine=MyISAM default CHARSET=utf8mb4 comment='操作记录表';
 
-
+# 登录日志记录
 CREATE TABLE if not exists `admin_login_log`(
 	`id` int(10) unsigned not null auto_increment,
 	`uname` varchar(20) comment '登录人',
