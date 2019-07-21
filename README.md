@@ -31,10 +31,11 @@ App
 
 #### 二、环境
 ```
-php >= 7.1
-swoole-4.3
+php >= 7.1 
+swoole-4.3 
 [composer 下载安装](https://www.cnblogs.com/xiaobaiskill/p/11003514.html)
 ```
+
 
 #### 三、安装
 ```
@@ -52,7 +53,6 @@ swoole-4.3
 * 执行 sql.sql
 
 ```
-
 
 
 #### 四、设置
@@ -127,9 +127,10 @@ php easyswoole start  produce d   // 加载produce.php 文件
 `下划线 (如： $pwd_hash $user_info)`
 
 
+#### 七、后台展示
+* 7.1 主页
 
-
-#### 七、其他
+#### 八、其他
 ```
 [cache](https://packagist.org/packages/easyswoole/cache)
 
