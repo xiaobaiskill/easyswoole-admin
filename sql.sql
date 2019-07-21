@@ -61,6 +61,8 @@ INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (14, '增
 INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (15, '修改权限', 'auth.rule.set', 1, 4);
 INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (16, '删除权限', 'auth.rule.del', 1, 4);
 INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (17, '变更权限', 'auth.role.rule', 1, 3);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (18, '主页', 'index', 1, 0);
+INSERT INTO `admin_rule`(`id`, `name`, `node`, `status`, `pid`) VALUES (19, '登录日志', 'index.login.log', 1, 18);
 
 
 CREATE TABLE if not exists `admin_log` (

@@ -1,7 +1,7 @@
 @extends('admin.auth.ruleBase')
 
 @section('body-title')
-  <div class="layui-card-header">添加权限</div>
+  <div class="layui-card-header">@if(isset($info)) {{$info['name']}} -- @endif添加权限</div>
 @endsection
 @section('javascriptFooter')
 <script>

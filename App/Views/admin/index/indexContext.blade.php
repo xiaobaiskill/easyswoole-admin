@@ -22,29 +22,14 @@
 <div>
 	<div class="layui-row layui-col-space15">
 		<div class="layui-col-md8">
-			<div class="layui-row">
-				<div class="layui-col-md6">
-					@yield('quick')
-				</div>
-				<div class="layui-col-md6">
-					@yield('quick')
-				</div>
-			</div>
-
-			<!-- 登录记录 -->
-			<div class="layui-card">
-				<div class="layui-card-header">登录记录</div>
-				<div class="layui-card-body">
-					<table class="layui-hide" id="login_log" lay-filter="login_log"></table>
-					<script type="text/html" id="statusTpl">
-						@{{#  if(d.status === 1){ }}
-							<span style="color: #F581B1;">登录成功</span>
-						@{{#  } else { }}
-							登录失败
-						@{{#  } }}
-					</script>
-				</div>
-			</div>
+			@component('admin.index.quick',['role_group'=>$role_group])
+			@endcomponent
+			
+			@if($role_group->hasRule('index.login.log'))
+				<!-- 登录记录 -->
+				@component('admin.index.login_log')
+				@endcomponent
+			@endif
 		</div>
 		<div class="layui-col-md4">
 			<div class="layui-card">
@@ -81,25 +66,6 @@
 
 @section('javascriptFooter')
 <script>
-layui.use('table', function(){
-	var table = layui.table, form = layui.form;
-
-	table.render({
-		elem: '#login_log'
-		,url:'/login_log'
-		,method:'post'
-		,page: true
-		,title: '用户数据表'
-		,cols: [[
-			{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-			,{field:'uname', title:'登录名'}
-			,{field:'status', title:'是否登录成功', templet: '#statusTpl'}
-			,{field:'created_at', title:'登录时间'}
-		]]
-		,defaultToolbar:[]
-	});
-});
-
 $('.Jump').click(function(){
 	parent.Jump($(this).attr('src'));
 });

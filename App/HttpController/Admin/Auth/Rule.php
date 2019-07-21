@@ -84,7 +84,12 @@ class Rule extends AdminController
         if(!$this->hasRuleForGet($this->rule_rule_add)) return ;
 
         $id = $this->request()->getRequestParam('id');
-        $this->render('admin.auth.ruleAdd', ['id' => $id]);
+        $info = RuleModel::getInstance()->find($id);
+        if (!$info) {
+            $this->show404();
+            return;
+        }
+        $this->render('admin.auth.ruleAdd', ['id' => $id,'info'=>$info]);
     }
 
     public function addChildData()
