@@ -8,5 +8,3 @@ easyswoole
 produce.php
 
 App/Config/Database.php
-App/Utility/RoleGroup/RoleGroup*.php
-!App/Utility/RoleGroup/RoleGroup1.php
