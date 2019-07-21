@@ -38,9 +38,11 @@ App
   |- Common                   // 公共函数
   |- HttpController           // 控制器类文件夹
       |- Router.php             // 路由文件
-      |- Web                    // web模块
-          |- Idea.php           // 意见反馈类文件
-          |- VeidyCode.php      // 验证码类
+      |- Admin                   // 后台管理模块
+          |- Auth                // 管理者模块
+          |- Setting             // 设置模块 
+          |- Index.php           // 菜单 和 主页 
+          |- Login.php           // 登录
   |- Model
       |-AdminAuth.php                // auth model 类 继承了BaseModel
   |- Process                  // 和进程有关的文件都存于此处
@@ -49,6 +51,7 @@ App
   |- Utility                  // 公共组件
       |- Log                    // 日志组件
       |- Message                // 消息 组件
+      |- RoleGroup              // 用户组 组件
       |- Pool                   // 进程 组件 （mysql池，redis池）
       |- Template               // 模板类文件夹
   |- Views                    // 模板
