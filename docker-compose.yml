@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  mysql:
+    image: "mysql:5.7.20"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysqlroot
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf/my.cnf:/etc/my.cnf
+      - ./mysql/init:/docker-entrypoint-initdb.d/
+    ports:
+      - "3306:3306"
+
+  php-swoole:
+    build:
+      context: .
+    restart: always
+    container_name: php_swoole
+    depends_on:
+      - mysql
+    ports:
+      - 9503:9503
+    volumes:
+      - "./log:/home/www/Log"
+  
+  # css 文件 网页不加载. content-type:text/plian
+  # nginx:
+  #   image: nginx
+  #   depends_on:
+  #     - php-swoole
+  #   volumes:
+  #     - "./App/Static:/Static"
+  #     - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
+  #   ports:
+  #     - "8081:80"
+
+

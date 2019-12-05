@@ -11,7 +11,7 @@
         }
     },
     "require": {
-        "easyswoole/easyswoole": "3.x",
+        "easyswoole/easyswoole": "3.2.x",
 		"easyswoole/template": "^1.0",
 		"easyswoole/mysqli": "^1.1",
 		"easyswoole/verifycode": "^3.0",

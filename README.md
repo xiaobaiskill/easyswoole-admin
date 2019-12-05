@@ -77,7 +77,7 @@ swoole-4.3
 
 #### 四、安装
 ```
-* composer config -g repo.packagist composer https://packagist.laravel-china.org
+* composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 * composer install
 // 无法下载 可忽略版本 composer install --ignore-platform-reqs
