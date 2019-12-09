@@ -5,7 +5,6 @@ vendor
 Temp
 composer.lock
 easyswoole
-produce.php
 
 App/Config/Database.php
 /mysql/data
