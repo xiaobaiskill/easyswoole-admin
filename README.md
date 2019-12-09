@@ -1,7 +1,17 @@
 基于 easyswoole 二次开发
 ====
 
-#### 一、后台展示
+#### 一、后台
+[http://39.105.61.1:8081/](http://39.105.61.1:8081/)
+```
+// 后台帐号密码 admin 123123
+
+往各位高抬贵手,不要改动admin的账号的密码和权限.
+做人留一线 日后好相见
+```
+
+
+#### 二、后台展示
 * 1.1 主页
 ![主页](show/主页.png)
 
@@ -27,7 +37,7 @@
 ![添加权限](show/添加权限.png)
 
 
-#### 二、目录介绍
+#### 三、目录介绍
 ```
 App
   |- Base                     // 基础类文件
@@ -57,7 +67,7 @@ App
   |- Views                    // 模板
 ```
 
-#### 三、功能
+#### 四、功能
 ```
 1、登录
 2、token 认证
@@ -67,56 +77,63 @@ App
 6、权限管理
 ```
 
-#### 三、环境
+
+#### 五、环境
+* 5.1 使用docker 搭建。   启动完成后设置一下nginx 反向代理和静态资源 请看5.3
+```
+docker-compose up -d
+// 使用docker 搭建
+```
+
+* 5.2 不使用docker 搭建   启动完成后 设置一下 nginx 反向代理和静态资源。请看5.3
 ```
 php >= 7.1 
 swoole-4.3 
 [composer 下载安装](https://www.cnblogs.com/xiaobaiskill/p/11003514.html)
-```
 
+// 换composer 的源
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
-#### 四、安装
-```
-* composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-
-* composer install
+// 下载组件
+composer install
 // 无法下载 可忽略版本 composer install --ignore-platform-reqs
 
 
-* cp vendor/easyswoole/easyswoole/bin/easyswoole easyswoole
+cp vendor/easyswoole/easyswoole/bin/easyswoole easyswoole
 
-* cp dev.php produce.php
-// 修改produce.php 中的DEBUG => false
+启动mysql  执行 sql.sql
 
-* 执行 sql.sql
+mv App/Config/Database.php.bak  App/Config/Database.php
+修改data配置
 
+php easyswoole start product
+// 启动 product 是生产环境 dev 是开发环境,默认模式是开发环境
 ```
 
-
-#### 五、设置
-* 5.1 nginx 配置
+* 5.3 nginx 配置
 ```
 location / {
       rewrite ^/(.*)$ /admin/$1 break;
-      proxy_pass  http://127.0.0.1:9503;
+      proxy_pass  http://127.0.0.1:9503;  # 反向代理至http://127.0.0.1:9503
       proxy_redirect     off;
       proxy_set_header   Host             $host;
       proxy_set_header   X-Real-IP        $remote_addr;
       proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
   }
-location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|woff2|woff|ttf|ico)$
+location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|woff2|woff|ttf|ico)$     # 这个要全
 {
-    root /path/to/App/Static;  // 写这个项目静态文件夹的绝对地址
+    root /path/to/App/Static;  # 写这个项目静态文件夹的绝对地址
     expires      30d;
 }
 location ~ .*\.(js|css|map)?$
 {
-    root /path/to/App/Static; // 写这个项目静态文件夹的绝对地址
+    root /path/to/App/Static; # 写这个项目静态文件夹的绝对地址
     expires      12h;
 }
 
 ```
-* 5.2 db 配置文件
+
+* 5.4 db 配置文件讲解
 ```
 在App/Config 目录下添加文件 Database.php
 
@@ -143,16 +160,8 @@ return [
 ?>
 ```
 
-#### 六、启动
+#### 六、账号
 ```
-// 测试环境启动
-* php easyswoole start d   // 守护模式启动   默认加载 dev.php 文件
-
-
-// 正式环境启动
-php easyswoole start  produce d   // 加载produce.php 文件
-
-
 // 后台帐号密码 admin 123123
 ```
 
