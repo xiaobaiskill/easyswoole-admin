@@ -10,7 +10,9 @@ RUN composer install
 
 RUN cp vendor/easyswoole/easyswoole/bin/easyswoole easyswoole
 
-RUN cp App/Config/Database.php.bak App/Config/Database.php 
+RUN cp App/Config/Database.php.bak App/Config/Database.php
+
+RUN ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 EXPOSE 9503
 
