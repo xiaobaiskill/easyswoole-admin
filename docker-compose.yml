@@ -9,6 +9,8 @@ services:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/conf/my.cnf:/etc/my.cnf
       - ./mysql/init:/docker-entrypoint-initdb.d/
+    environment: 
+      - TZ=Asia/Shanghai
     ports:
       - "3307:3306"
 
